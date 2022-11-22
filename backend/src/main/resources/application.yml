@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    include: API-KEY
+  datasource:
+    url: jdbc:mysql://localhost:3306/jamddo?serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+  properties:
+    hibernate:
+      format_sql: true
