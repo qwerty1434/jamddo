@@ -1,22 +1,19 @@
-package com.jamddo.lotto.domain;
+package com.jamddo.lotto.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@Entity
-public class winInfo {
-    @Id
-    @Column(name="lotto_round")
-    private Long id;
+@Data
+public class WinInfoDto {
+    // 회차
+    private Long round;
 
+    // 로또번호
     private int firstNum;
     private int secondNum;
     private int thirdNum;
@@ -25,14 +22,15 @@ public class winInfo {
     private int sixthNum;
     private int bonusNum;
 
+    // 상금
     private long firstPrize;
     private long secondPrize;
     private long thirdPrize;
     private long fourthPrize;
 
+    // 당첨자 수
     private int firstPrizeBeneficiaryNum;
     private int secondPrizeBeneficiaryNum;
     private int thirdPrizeBeneficiaryNum;
     private int fourthPrizeBeneficiaryNum;
-
 }
