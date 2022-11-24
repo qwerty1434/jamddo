@@ -6,20 +6,19 @@ import com.jamddo.lotto.dto.WinInfoDto;
 import com.jamddo.lotto.dto.WinningNumsDto;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
+
 
 import java.util.Arrays;
 import java.util.Random;
 
 
+
 @RequiredArgsConstructor
+@Component
 public class Lotto {
     private final WinInfoRepository winInfoRepository;
 
-    WinningNumsDto winningNumsDto = winInfoRepository.winningNumOfThisWeek();
-    WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
 
     public LottoDto Generate(){
         Random random = new Random();
@@ -43,8 +42,9 @@ public class Lotto {
                 .sixthNum(Lotto[5])
                 .build();
     }
-
     public ResultDto Scoring(LottoDto lotto){
+        WinningNumsDto winningNumsDto = winInfoRepository.winningNumOfThisWeek();
+        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
         boolean bonus = false;
         int cnt = 0;
         for (int i:lotto.getNumList()) {
@@ -93,6 +93,7 @@ public class Lotto {
                 .winningPrize(winningPrize)
                 .beneficiaryNum(beneficiaryNum)
                 .myPrize(winningPrize/beneficiaryNum)
+                .lottoDto(lotto)
                 .build();
     }
 

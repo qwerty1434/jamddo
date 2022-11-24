@@ -14,4 +14,5 @@ public class ResultDto {
     private long winningPrize;
     private int beneficiaryNum;
     private long myPrize;
+    private LottoDto lottoDto;
 }
