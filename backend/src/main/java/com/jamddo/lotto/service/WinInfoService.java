@@ -16,7 +16,6 @@ public class WinInfoService {
 
     @Transactional
     public LottoDto buy(){
-        // 로또 하나 구매하기
         return lotto.Generate();
     }
 
