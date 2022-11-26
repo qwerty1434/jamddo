@@ -1,7 +1,7 @@
 package com.jamddo.lotto.utils;
 
 import com.jamddo.lotto.dto.LottoDto;
-import com.jamddo.lotto.dto.ResultDto;
+import com.jamddo.lotto.dto.BuyResultDto;
 import com.jamddo.lotto.dto.WinInfoDto;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +39,8 @@ public class Lotto {
                 .sixthNum(Lotto[5])
                 .build();
     }
-    public ResultDto Scoring(LottoDto lotto){
-        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
+    public BuyResultDto Scoring(LottoDto lotto, WinInfoDto winInfoDto){
+
         boolean bonus = false;
         int cnt = 0;
         int[] lottoNum = new int[]{lotto.getFifthNum(),lotto.getSecondNum(),lotto.getThirdNum(),lotto.getFourthNum(),lotto.getFifthNum(),lotto.getSixthNum()};
@@ -85,7 +85,7 @@ public class Lotto {
             beneficiaryNum = 1;
         }
 
-        return ResultDto.builder()
+        return BuyResultDto.builder()
                 .rank(rank)
                 .winningPrize(winningPrize)
                 .beneficiaryNum(beneficiaryNum)

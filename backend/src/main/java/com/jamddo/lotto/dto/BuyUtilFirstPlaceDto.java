@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class ResultDto {
-    private int rank;
-    private long winningPrize;
-    private int beneficiaryNum;
-    private long myPrize;
-    private LottoDto lottoDto;
+public class BuyUtilFirstPlaceDto {
+    int cnt;
+    long money;
+    int[] notFirstButPrize;
 }

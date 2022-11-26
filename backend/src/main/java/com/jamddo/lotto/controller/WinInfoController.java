@@ -4,5 +4,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WinInfoController {
+    // 이번주 관련
+    // 1위번호
+
+
+    // 통계 관련
 
 }

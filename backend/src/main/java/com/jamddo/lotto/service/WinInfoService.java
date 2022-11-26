@@ -1,7 +1,6 @@
 package com.jamddo.lotto.service;
 
-import com.jamddo.lotto.dto.LottoDto;
-import com.jamddo.lotto.dto.ResultDto;
+import com.jamddo.lotto.dto.*;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import com.jamddo.lotto.utils.Lotto;
 import lombok.RequiredArgsConstructor;
@@ -12,14 +11,54 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class WinInfoService {
-    private final WinInfoRepository winInfoRepository;
     private final Lotto lotto;
+    private final WinInfoRepository winInfoRepository;
 
     @Transactional
-    public ResultDto buyOne(){
+    public LottoDto buy(){
         // 로또 하나 구매하기
-        LottoDto myLotto = lotto.Generate();
-        // 결과
-        return lotto.Scoring(myLotto);
+        return lotto.Generate();
+    }
+
+    public BuyResultDto scoring(LottoDto myLotto, WinInfoDto winInfoDto){
+        return lotto.Scoring(myLotto,winInfoDto);
+    }
+
+    public BuyResultDto buyOne(){
+        LottoDto myLotto = buy();
+        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
+        return scoring(myLotto,winInfoDto);
+    }
+
+    @Transactional
+    public BuyUtilFirstPlaceDto untilFirstPlace(){
+        int cnt = 0;
+        long money = 0;
+        int[] notFirstButPrize = new int[4];
+        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
+        while(true){
+            cnt++;
+            money+=1000;
+            LottoDto myLotto = buy();
+            BuyResultDto result = scoring(myLotto,winInfoDto);
+            if(result.getRank() == 1) break;
+            else if(result.getRank() == 2) {
+                notFirstButPrize[0]++;
+            }
+            else if(result.getRank() == 3) {
+                notFirstButPrize[1]++;
+            }
+            else if(result.getRank() == 4) {
+                notFirstButPrize[2]++;
+            }
+            else if(result.getRank() == 5) {
+                notFirstButPrize[3]++;
+            }
+        }
+        return BuyUtilFirstPlaceDto.builder()
+                .cnt(cnt)
+                .money(money)
+                .notFirstButPrize(notFirstButPrize)
+                .build();
     }
 }

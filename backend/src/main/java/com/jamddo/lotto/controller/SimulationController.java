@@ -15,9 +15,18 @@ public class SimulationController {
     private final WinInfoService winInfoService;
     @ApiOperation(value ="로또 하나를 샀을 때 결과")
     @GetMapping("/buyOne")
-    public ResponseEntity findLocalCategoryHobbyList(){
+    public ResponseEntity buyOne(){
         return ResponseEntity.status(HttpStatus.OK).body(
                 winInfoService.buyOne()
         );
     }
+
+    @ApiOperation(value = "1등 당첨될 때까지 구매")
+    @GetMapping("/untilFirstPlace")
+    public ResponseEntity untilFirstPlace(){
+        return ResponseEntity.status(HttpStatus.OK).body(
+                winInfoService.untilFirstPlace()
+        );
+    }
+
 }
