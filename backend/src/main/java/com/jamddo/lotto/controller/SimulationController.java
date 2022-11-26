@@ -1,7 +1,6 @@
 package com.jamddo.lotto.controller;
 
-import com.jamddo.lotto.repository.WinInfoRepository;
-import com.jamddo.lotto.service.WinInfoService;
+import com.jamddo.lotto.service.SimulationService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/simul")
 public class SimulationController {
-    private final WinInfoService winInfoService;
+    private final SimulationService simulationService;
     @ApiOperation(value ="로또 하나를 구매")
     @GetMapping("/buyOne")
     public ResponseEntity buyOne(){
         return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.buyOne()
+                simulationService.buyOne()
         );
     }
 
@@ -27,7 +26,7 @@ public class SimulationController {
     @GetMapping("/untilFirstPlace")
     public ResponseEntity untilFirstPlace(){
         return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.untilFirstPlace()
+                simulationService.untilFirstPlace()
         );
     }
 

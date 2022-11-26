@@ -57,4 +57,5 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
                 .orderBy(winInfo.id.desc())
                 .fetchFirst();
     }
+
 }
