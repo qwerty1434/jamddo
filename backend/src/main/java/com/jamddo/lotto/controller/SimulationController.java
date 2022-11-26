@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SimulationController {
     private final WinInfoService winInfoService;
-    @ApiOperation(value ="로또 하나를 샀을 때 결과")
+    @ApiOperation(value ="로또 하나를 구매")
     @GetMapping("/buyOne")
     public ResponseEntity buyOne(){
         return ResponseEntity.status(HttpStatus.OK).body(
@@ -28,5 +28,7 @@ public class SimulationController {
                 winInfoService.untilFirstPlace()
         );
     }
+
+
 
 }

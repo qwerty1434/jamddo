@@ -55,10 +55,22 @@ public class WinInfoService {
                 notFirstButPrize[3]++;
             }
         }
+
+        // 얼마의 이득 혹은 손해를 봤는지
+        long profit =
+                winInfoDto.getFirstPrize() / winInfoDto.getFirstPrizeBeneficiaryNum()
+                + (notFirstButPrize[0] *( winInfoDto.getSecondPrize()) / winInfoDto.getSecondPrizeBeneficiaryNum())
+                + (notFirstButPrize[1] *( winInfoDto.getThirdNum()) / winInfoDto.getThirdPrizeBeneficiaryNum())
+                + (notFirstButPrize[2] *( winInfoDto.getFourthNum()) / winInfoDto.getFourthPrizeBeneficiaryNum())
+                + notFirstButPrize[3] *(5000)
+                - money;
+
+
         return BuyUtilFirstPlaceDto.builder()
                 .cnt(cnt)
                 .money(money)
                 .notFirstButPrize(notFirstButPrize)
+                .profit(profit)
                 .build();
     }
 }

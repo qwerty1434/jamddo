@@ -13,4 +13,5 @@ public class BuyUtilFirstPlaceDto {
     int cnt;
     long money;
     int[] notFirstButPrize;
+    long profit;
 }
