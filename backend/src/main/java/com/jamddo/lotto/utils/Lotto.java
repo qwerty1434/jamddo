@@ -21,10 +21,10 @@ public class Lotto {
 
 
     public LottoDto Generate(){
-        Random random = new Random();
         int[] Lotto = new int[6];
         for (int i = 0; i < 6; i++) {
             int num = (int)(Math.random() * 45) + 1;
+            Lotto[i] = num;
             for (int j = 0; j < i; j++) {
                 if(Lotto[i] == Lotto[j]){
                     i--;
@@ -85,9 +85,6 @@ public class Lotto {
             beneficiaryNum = 1;
         }
 
-
-
-
         return ResultDto.builder()
                 .rank(rank)
                 .winningPrize(winningPrize)
@@ -96,6 +93,4 @@ public class Lotto {
                 .lottoDto(lotto)
                 .build();
     }
-
-
 }
