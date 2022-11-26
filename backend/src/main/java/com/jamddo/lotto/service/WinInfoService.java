@@ -2,8 +2,6 @@ package com.jamddo.lotto.service;
 
 import com.jamddo.lotto.dto.LottoDto;
 import com.jamddo.lotto.dto.ResultDto;
-import com.jamddo.lotto.dto.WinInfoDto;
-import com.jamddo.lotto.dto.WinningNumsDto;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import com.jamddo.lotto.utils.Lotto;
 import lombok.RequiredArgsConstructor;

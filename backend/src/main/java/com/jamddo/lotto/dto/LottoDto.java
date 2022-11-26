@@ -17,5 +17,4 @@ public class LottoDto {
     private int fifthNum;
     private int sixthNum;
 
-    private final int[] numList = new int[]{this.firstNum,this.secondNum,this.thirdNum,this.fourthNum,this.fifthNum,this.sixthNum };
 }

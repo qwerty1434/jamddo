@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class WinningNumsDto {
+public class WinningNumDto {
     private int firstNum;
     private int secondNum;
     private int thirdNum;
@@ -17,6 +17,4 @@ public class WinningNumsDto {
     private int fifthNum;
     private int sixthNum;
     private int bonusNum;
-    private final int[] numList = new int[]{this.firstNum,this.secondNum,this.thirdNum,this.fourthNum,this.fifthNum,this.sixthNum };
-
 }

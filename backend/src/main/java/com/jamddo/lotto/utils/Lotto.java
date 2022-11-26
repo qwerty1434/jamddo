@@ -3,15 +3,12 @@ package com.jamddo.lotto.utils;
 import com.jamddo.lotto.dto.LottoDto;
 import com.jamddo.lotto.dto.ResultDto;
 import com.jamddo.lotto.dto.WinInfoDto;
-import com.jamddo.lotto.dto.WinningNumsDto;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
 import java.util.Arrays;
-import java.util.Random;
-
 
 
 @RequiredArgsConstructor
@@ -43,18 +40,21 @@ public class Lotto {
                 .build();
     }
     public ResultDto Scoring(LottoDto lotto){
-        WinningNumsDto winningNumsDto = winInfoRepository.winningNumOfThisWeek();
         WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
         boolean bonus = false;
         int cnt = 0;
-        for (int i:lotto.getNumList()) {
-            for (int j:winningNumsDto.getNumList()) {
-                if(i == j) cnt++;
+        int[] lottoNum = new int[]{lotto.getFifthNum(),lotto.getSecondNum(),lotto.getThirdNum(),lotto.getFourthNum(),lotto.getFifthNum(),lotto.getSixthNum()};
+        int[] winningNum = new int[]{winInfoDto.getFirstNum(),winInfoDto.getSecondNum(),winInfoDto.getThirdNum(),winInfoDto.getFourthNum(),winInfoDto.getFifthNum(),winInfoDto.getSixthNum()};
+        int bonusNum = winInfoDto.getBonusNum();
+        for (int lNum: lottoNum) {
+            for (int wNum: winningNum) {
+                if(lNum == wNum) cnt++;
             }
-            if(i == winningNumsDto.getBonusNum()){
+            if(lNum == bonusNum){
                 bonus = true;
             }
         }
+
         int rank;
         Long winningPrize;
         int beneficiaryNum;

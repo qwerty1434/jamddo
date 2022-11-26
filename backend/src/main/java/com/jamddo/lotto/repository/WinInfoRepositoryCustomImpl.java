@@ -1,16 +1,60 @@
 package com.jamddo.lotto.repository;
 
 import com.jamddo.lotto.dto.WinInfoDto;
-import com.jamddo.lotto.dto.WinningNumsDto;
+import com.jamddo.lotto.dto.WinningNumDto;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import static com.jamddo.lotto.domain.QWinInfo.winInfo;
+
+import javax.persistence.EntityManager;
 
 public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
+    private final JPAQueryFactory queryFactory;
+
+    public WinInfoRepositoryCustomImpl(EntityManager em) {
+        this.queryFactory = new JPAQueryFactory(em);
+    }
+
     @Override
-    public WinningNumsDto winningNumOfThisWeek() {
-        return null;
+    public WinningNumDto winningNumOfThisWeek() {
+        return queryFactory
+                .select(Projections.constructor(WinningNumDto.class,
+                winInfo.firstNum,
+                winInfo.secondNum,
+                winInfo.thirdNum,
+                winInfo.fourthNum,
+                winInfo.fifthNum,
+                winInfo.sixthNum,
+                winInfo.bonusNum
+                ))
+                .from(winInfo)
+                .orderBy(winInfo.id.desc())
+                .fetchFirst();
     }
 
     @Override
     public WinInfoDto InfoOfThisWeek() {
-        return null;
+        return queryFactory
+                .select(Projections.constructor(WinInfoDto.class,
+                        winInfo.id,
+                        winInfo.firstNum,
+                        winInfo.secondNum,
+                        winInfo.thirdNum,
+                        winInfo.fourthNum,
+                        winInfo.fifthNum,
+                        winInfo.sixthNum,
+                        winInfo.bonusNum,
+                        winInfo.firstPrize,
+                        winInfo.secondPrize,
+                        winInfo.thirdPrize,
+                        winInfo.fourthPrize,
+                        winInfo.firstPrizeBeneficiaryNum,
+                        winInfo.secondPrizeBeneficiaryNum,
+                        winInfo.thirdPrizeBeneficiaryNum,
+                        winInfo.fourthPrizeBeneficiaryNum
+                ))
+                .from(winInfo)
+                .orderBy(winInfo.id.desc())
+                .fetchFirst();
     }
 }
