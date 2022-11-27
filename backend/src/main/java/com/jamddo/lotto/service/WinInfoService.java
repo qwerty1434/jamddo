@@ -1,5 +1,6 @@
 package com.jamddo.lotto.service;
 
+import com.jamddo.lotto.dto.NumStatisticDto;
 import com.jamddo.lotto.dto.WinInfoDto;
 import com.jamddo.lotto.dto.WinningNumDto;
 import com.jamddo.lotto.repository.WinInfoRepository;
@@ -21,4 +22,7 @@ public class WinInfoService {
         return winInfoRepository.InfoOfThisWeek();
     }
 
+    public NumStatisticDto NumStatistic(int limitNum) {
+        return winInfoRepository.NumStatistic(limitNum);
+    }
 }

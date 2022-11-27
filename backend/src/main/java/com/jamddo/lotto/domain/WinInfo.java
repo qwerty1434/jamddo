@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +16,9 @@ public class WinInfo {
     @Id
     @Column(name="lotto_round")
     private Long id;
+
+    // 당첨일자
+    LocalDate date;
 
     @OneToOne
     @JoinColumn(name = "winNum_id")
