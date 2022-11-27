@@ -41,4 +41,12 @@ public class WinInfoController {
         );
     }
 
+    @ApiOperation(value ="당첨번호 통계 - 색상별로 묶기")
+    @GetMapping("/statistics/number/color/{limitCnt}")
+    public ResponseEntity ColorStatistic(@PathVariable int limitCnt){
+        return ResponseEntity.status(HttpStatus.OK).body(
+                winInfoService.ColorStatistic(limitCnt)
+        );
+    }
+
 }

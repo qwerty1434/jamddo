@@ -82,7 +82,6 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
                 .fetch();
 
         int[] statisticResult = new int[46];
-        int[] bonusResult = new int[46];
         for (WinningNumDto dto:result) {
             statisticResult[dto.getFirstNum()]++;
             statisticResult[dto.getSecondNum()]++;
@@ -90,10 +89,9 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
             statisticResult[dto.getFourthNum()]++;
             statisticResult[dto.getFifthNum()]++;
             statisticResult[dto.getSixthNum()]++;
-            bonusResult[dto.getBonusNum()]++;
         }
 
-        return NumStatisticDto.builder().statisticResult(statisticResult).bonusResult(bonusResult).build();
+        return NumStatisticDto.builder().statisticResult(statisticResult).build();
     }
 
 }

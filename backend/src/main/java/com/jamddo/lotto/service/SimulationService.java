@@ -18,11 +18,11 @@ public class SimulationService {
     public LottoDto buy(){
         return lotto.Generate();
     }
-
+    @Transactional
     public BuyResultDto scoring(LottoDto myLotto, WinInfoDto winInfoDto){
         return lotto.Scoring(myLotto,winInfoDto);
     }
-
+    @Transactional
     public BuyResultDto buyOne(){
         LottoDto myLotto = buy();
         WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();

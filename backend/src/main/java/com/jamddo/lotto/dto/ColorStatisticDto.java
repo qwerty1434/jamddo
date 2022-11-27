@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class NumStatisticDto {
-    int[] statisticResult = new int[46]; // 인덱스와 숫자번호를 일치시킴
+public class ColorStatisticDto {
+    int[] colorStatistic = new int[5];
 }
