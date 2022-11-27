@@ -1,6 +1,6 @@
 package com.jamddo.lotto.controller;
 
-import com.jamddo.lotto.service.SimulationService;
+
 import com.jamddo.lotto.service.WinInfoService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/info")
 public class WinInfoController {
     private final WinInfoService winInfoService;
-
+    // 이번주 관련
     @ApiOperation(value ="이번주 1위 당첨번호만")
     @GetMapping("/winningNum")
     public ResponseEntity winningNum(){
@@ -31,7 +31,6 @@ public class WinInfoController {
                 winInfoService.infoOfThisWeek()
         );
     }
-
     // 통계 관련
     @ApiOperation(value ="당첨번호 통계")
     @GetMapping("/statistics/number/{limitCnt}")
@@ -40,7 +39,6 @@ public class WinInfoController {
                 winInfoService.NumStatistic(limitCnt)
         );
     }
-
     @ApiOperation(value ="당첨번호 통계 - 색상별로 묶기")
     @GetMapping("/statistics/number/color/{limitCnt}")
     public ResponseEntity ColorStatistic(@PathVariable int limitCnt){

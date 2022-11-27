@@ -7,6 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -27,6 +32,27 @@ public class SimulationService {
         LottoDto myLotto = buy();
         WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
         return scoring(myLotto,winInfoDto);
+    }
+
+    @Transactional
+    public List<BuyResultDto> buyBundle(int Cnt){
+        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
+        List<BuyResultDto> result = new ArrayList<>();
+        for (int i = 0; i < Cnt; i++) {
+            LottoDto myLotto = buy();
+            result.add(scoring(myLotto,winInfoDto));
+        }
+        Collections.sort(result, new Comparator<BuyResultDto>(){
+            @Override
+            public int compare(BuyResultDto o1, BuyResultDto o2) {
+                return o1.getRank() - o2.getRank();
+            }
+        });
+
+
+
+        return result;
+
     }
 
     @Transactional
