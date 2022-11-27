@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,14 +16,9 @@ public class WinInfo {
     @Column(name="lotto_round")
     private Long id;
 
-    // 로또번호
-    private int firstNum;
-    private int secondNum;
-    private int thirdNum;
-    private int fourthNum;
-    private int fifthNum;
-    private int sixthNum;
-    private int bonusNum;
+    @OneToOne
+    @JoinColumn(name = "winNum_id")
+    private WinNum winNum;
 
     // 상금
     private long firstPrize;

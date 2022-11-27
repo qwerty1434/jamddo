@@ -5,6 +5,7 @@ import com.jamddo.lotto.dto.WinningNumDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import static com.jamddo.lotto.domain.QWinInfo.winInfo;
+import static com.jamddo.lotto.domain.QWinNum.winNum;
 
 import javax.persistence.EntityManager;
 
@@ -19,13 +20,13 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
     public WinningNumDto winningNumOfThisWeek() {
         return queryFactory
                 .select(Projections.constructor(WinningNumDto.class,
-                winInfo.firstNum,
-                winInfo.secondNum,
-                winInfo.thirdNum,
-                winInfo.fourthNum,
-                winInfo.fifthNum,
-                winInfo.sixthNum,
-                winInfo.bonusNum
+                        winNum.firstNum,
+                        winNum.secondNum,
+                        winNum.thirdNum,
+                        winNum.fourthNum,
+                        winNum.fifthNum,
+                        winNum.sixthNum,
+                        winNum.bonusNum
                 ))
                 .from(winInfo)
                 .orderBy(winInfo.id.desc())
@@ -37,13 +38,13 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
         return queryFactory
                 .select(Projections.constructor(WinInfoDto.class,
                         winInfo.id,
-                        winInfo.firstNum,
-                        winInfo.secondNum,
-                        winInfo.thirdNum,
-                        winInfo.fourthNum,
-                        winInfo.fifthNum,
-                        winInfo.sixthNum,
-                        winInfo.bonusNum,
+                        winNum.firstNum,
+                        winNum.secondNum,
+                        winNum.thirdNum,
+                        winNum.fourthNum,
+                        winNum.fifthNum,
+                        winNum.sixthNum,
+                        winNum.bonusNum,
                         winInfo.firstPrize,
                         winInfo.secondPrize,
                         winInfo.thirdPrize,
