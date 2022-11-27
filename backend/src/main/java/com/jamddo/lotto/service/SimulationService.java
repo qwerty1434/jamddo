@@ -42,11 +42,9 @@ public class SimulationService {
             LottoDto myLotto = buy();
             result.add(scoring(myLotto,winInfoDto));
         }
-        Collections.sort(result, new Comparator<BuyResultDto>(){
-            @Override
-            public int compare(BuyResultDto o1, BuyResultDto o2) {
-                return o1.getRank() - o2.getRank();
-            }
+        Collections.sort(result, (o1, o2) -> {
+            if(o1.getRank() == -1 || o2.getRank() == -1) return o2.getRank() - o1.getRank();
+            return o1.getRank() - o2.getRank();
         });
 
 
