@@ -30,8 +30,7 @@ public class SimulationController {
                 simulationService.buyBundle(Cnt)
         );
     }
-
-
+    
     @ApiOperation(value = "1등 당첨될 때까지 구매")
     @GetMapping("/untilFirstPlace")
     public ResponseEntity untilFirstPlace(){

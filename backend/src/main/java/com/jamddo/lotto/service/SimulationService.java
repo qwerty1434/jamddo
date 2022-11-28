@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -42,13 +41,11 @@ public class SimulationService {
             LottoDto myLotto = buy();
             result.add(scoring(myLotto,winInfoDto));
         }
+        // 기본적으로 오름차순 이지만 -1은 맨 뒤로 보내는 정렬
         Collections.sort(result, (o1, o2) -> {
             if(o1.getRank() == -1 || o2.getRank() == -1) return o2.getRank() - o1.getRank();
             return o1.getRank() - o2.getRank();
         });
-
-
-
         return result;
 
     }
