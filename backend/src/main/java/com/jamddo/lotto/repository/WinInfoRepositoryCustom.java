@@ -12,5 +12,5 @@ public interface WinInfoRepositoryCustom {
     WinInfoDto InfoOfThisWeek();
 
     // 전체 통계정보
-    NumStatisticDto NumStatistic(int limitCNt);
+    NumStatisticDto NumStatistic();
 }

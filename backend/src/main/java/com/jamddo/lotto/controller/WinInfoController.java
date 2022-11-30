@@ -33,17 +33,17 @@ public class WinInfoController {
     }
     // 통계 관련
     @ApiOperation(value ="당첨번호 통계")
-    @GetMapping("/statistics/number/{limitCnt}")
-    public ResponseEntity numStatistic(@PathVariable int limitCnt){
+    @GetMapping("/statistics/number")
+    public ResponseEntity numStatistic(){
         return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.NumStatistic(limitCnt)
+                winInfoService.NumStatistic()
         );
     }
     @ApiOperation(value ="당첨번호 통계 - 색상별로 묶기")
-    @GetMapping("/statistics/number/color/{limitCnt}")
-    public ResponseEntity ColorStatistic(@PathVariable int limitCnt){
+    @GetMapping("/statistics/number/color")
+    public ResponseEntity ColorStatistic(){
         return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.ColorStatistic(limitCnt)
+                winInfoService.ColorStatistic()
         );
     }
 

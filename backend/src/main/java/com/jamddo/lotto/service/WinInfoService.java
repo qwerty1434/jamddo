@@ -26,13 +26,13 @@ public class WinInfoService {
     }
 
     @Transactional
-    public NumStatisticDto NumStatistic(int limitNum) {
-        return winInfoRepository.NumStatistic(limitNum);
+    public NumStatisticDto NumStatistic() {
+        return winInfoRepository.NumStatistic();
     }
 
     @Transactional
-    public ColorStatisticDto ColorStatistic(int limitNum){
-        NumStatisticDto numStatisticDto = winInfoRepository.NumStatistic(limitNum);
+    public ColorStatisticDto ColorStatistic(){
+        NumStatisticDto numStatisticDto = winInfoRepository.NumStatistic();
         int[] colorStatistic = new int[5];
         int[] statisticResult = numStatisticDto.getStatisticResult();
         for (int i = 1; i <= 45 ; i++){

@@ -62,11 +62,7 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
     }
 
     @Override
-    public NumStatisticDto NumStatistic(int limitCnt) {
-        // 0이하의 숫자를 넣으면 전체조회
-        if(limitCnt<=0){
-            limitCnt = Integer.MAX_VALUE;
-        }
+    public NumStatisticDto NumStatistic() {
         List<WinningNumDto> result = queryFactory
                 .select(Projections.constructor(WinningNumDto.class,
                         winNum.firstNum,
@@ -78,7 +74,6 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
                         winNum.bonusNum
                 ))
                 .from(winInfo)
-                .limit(limitCnt)
                 .fetch();
 
         int[] statisticResult = new int[46];
