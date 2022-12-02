@@ -1,4 +1,4 @@
-package com.jamddo.common.config;
+package com.jamddo.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
