@@ -18,25 +18,39 @@ public class SimulationController {
     @ApiOperation(value ="로또 하나를 구매")
     @GetMapping("/buyOne")
     public ResponseEntity buyOne(){
-        return ResponseEntity.status(HttpStatus.OK).body(
-                simulationService.buyOne()
-        );
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    simulationService.buyOne()
+            );
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
     }
 
     @ApiOperation(value ="로또 N개 구매")
     @GetMapping("/buyBundle/{Cnt}")
     public ResponseEntity buyBundle(@PathVariable int Cnt){
-        return ResponseEntity.status(HttpStatus.OK).body(
-                simulationService.buyBundle(Cnt)
-        );
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    simulationService.buyBundle(Cnt)
+            );
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
     }
     
     @ApiOperation(value = "1등 당첨될 때까지 구매")
     @GetMapping("/untilFirstPlace")
     public ResponseEntity untilFirstPlace(){
-        return ResponseEntity.status(HttpStatus.OK).body(
-                simulationService.untilFirstPlace()
-        );
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    simulationService.untilFirstPlace()
+            );
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 

@@ -20,31 +20,47 @@ public class WinInfoController {
     @ApiOperation(value ="이번주 1위 당첨번호만")
     @GetMapping("/winningNum")
     public ResponseEntity winningNum(){
-        return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.winningNumOfThisWeek()
-        );
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    winInfoService.winningNumOfThisWeek()
+            );
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
     @ApiOperation(value ="이번주 회차, 당첨번호, 상금, 당첨자 수")
     @GetMapping("/overview")
     public ResponseEntity overview(){
-        return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.infoOfThisWeek()
-        );
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    winInfoService.infoOfThisWeek()
+            );
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
     // 통계 관련
     @ApiOperation(value ="당첨번호 통계")
     @GetMapping("/statistics/number")
     public ResponseEntity numStatistic(){
-        return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.NumStatistic()
-        );
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    winInfoService.NumStatistic()
+            );
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
     @ApiOperation(value ="당첨번호 통계 - 색상별로 묶기")
     @GetMapping("/statistics/number/color")
     public ResponseEntity ColorStatistic(){
-        return ResponseEntity.status(HttpStatus.OK).body(
-                winInfoService.ColorStatistic()
-        );
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    winInfoService.ColorStatistic()
+            );
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 }
