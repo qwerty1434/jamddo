@@ -18,7 +18,7 @@ public class CommentController {
     @PostMapping("/create")
     public ResponseEntity createComment(CreateCommentRequest createCommentRequest){
         try{
-            commentService.createBoard(createCommentRequest);
+            commentService.createComment(createCommentRequest);
             return ResponseEntity.status(HttpStatus.OK).build();
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

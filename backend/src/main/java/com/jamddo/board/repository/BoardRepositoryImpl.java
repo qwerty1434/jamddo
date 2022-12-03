@@ -25,8 +25,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return queryFactory
                 .select(Projections.constructor(BoardDto.class,
                         user.nickname,
-                        board.content,
-                        board.commentList
+                        board.content
                 ))
                 .from(board)
                 .innerJoin(board.user,user)
@@ -39,8 +38,7 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
         return queryFactory
                 .select(Projections.constructor(BoardDto.class,
                         user.nickname,
-                        board.content,
-                        board.commentList
+                        board.content
                 ))
                 .from(board)
                 .innerJoin(board.user,user)

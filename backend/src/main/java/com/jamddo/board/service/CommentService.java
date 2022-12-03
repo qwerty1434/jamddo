@@ -23,7 +23,7 @@ public class CommentService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public Long createBoard(CreateCommentRequest createCommentRequest) {
+    public Long createComment(CreateCommentRequest createCommentRequest) {
         Long userId = createCommentRequest.getUserId();
         User user = userRepository.getReferenceById(userId);
 

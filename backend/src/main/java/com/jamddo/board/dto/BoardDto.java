@@ -12,5 +12,4 @@ import java.util.List;
 public class BoardDto {
     String writerNickname;
     String content;
-    List<CommentDto> commentList;
 }

@@ -24,6 +24,8 @@ public class User {
 
     private String nickname;
 
+    private String password;
+
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Board> boardList = new ArrayList<>();
