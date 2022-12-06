@@ -1,8 +1,10 @@
 package com.jamddo.lotto.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,6 +20,7 @@ public class WinInfo {
     private Long id;
 
     // 당첨일자
+    @DateTimeFormat(pattern="yyyy.MM.dd")
     LocalDate date;
 
     @OneToOne
