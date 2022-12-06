@@ -40,10 +40,9 @@ public class Lotto {
                 .build();
     }
     public BuyResultDto Scoring(LottoDto lotto, WinInfoDto winInfoDto){
-
         boolean bonus = false;
         int cnt = 0;
-        int[] lottoNum = new int[]{lotto.getFifthNum(),lotto.getSecondNum(),lotto.getThirdNum(),lotto.getFourthNum(),lotto.getFifthNum(),lotto.getSixthNum()};
+        int[] lottoNum = new int[]{lotto.getFirstNum(),lotto.getSecondNum(),lotto.getThirdNum(),lotto.getFourthNum(),lotto.getFifthNum(),lotto.getSixthNum()};
         int[] winningNum = new int[]{winInfoDto.getFirstNum(),winInfoDto.getSecondNum(),winInfoDto.getThirdNum(),winInfoDto.getFourthNum(),winInfoDto.getFifthNum(),winInfoDto.getSixthNum()};
         int bonusNum = winInfoDto.getBonusNum();
         for (int lNum: lottoNum) {
