@@ -2,9 +2,9 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/statistic">About</router-link>
+      <router-link to="/statistic">Statistic</router-link>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 

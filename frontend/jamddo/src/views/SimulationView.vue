@@ -1,13 +1,32 @@
 <template>
   <div class="home">
     <h1>여기는 시뮬레이션</h1>
-    <button v-on:click="buyOne">로또1번 구매</button>
-    <div>{{ buyOneData }}</div>
+    <b-button variant="outline-primary" v-on:click="buyOne"
+      >1게임 진행</b-button
+    >
+    <!-- <div>{{ buyOneData }}</div> -->
+    <BuyoneComp :data="buyOneData" />
+    <!-- <div v-for="(item, index) in buyOneData" :key="index">{{ item }}</div> -->
 
-    <button v-on:click="buyBundle()">로또N번 구매</button>
+    <!-- <button v-on:click="buyBundle()">로또N번 구매</button> -->
+
+    <form v-on:submit.prevent="buyBundle">
+      연속
+      <input
+        v-model="Cnt"
+        type="number"
+        value="5"
+        max="500"
+        style="width: 70px"
+      />
+      게임
+      <b-button variant="outline-primary" type="submit">진행</b-button>
+    </form>
     <div>{{ buyBundleData }}</div>
 
-    <button v-on:click="buyUntilFirstPlace">1등 나올때까지 구매</button>
+    <b-button variant="outline-primary" v-on:click="buyUntilFirstPlace">
+      1등 나올때까지 진행
+    </b-button>
     <div>{{ buyUntilFirstPlaceData }}</div>
   </div>
 </template>
@@ -15,13 +34,16 @@
 <script>
 const addr = "http://localhost:8080/simulation";
 import axios from "axios";
+import BuyoneComp from "@/components/BuyoneComp";
 export default {
   name: "HomeView",
+  components: { BuyoneComp },
   data() {
     return {
-      buyOneData: "",
-      buyBundleData: "",
-      buyUntilFirstPlaceData: "",
+      buyOneData: null,
+      buyBundleData: null,
+      buyUntilFirstPlaceData: null,
+      Cnt: 5,
     };
   },
   methods: {
@@ -37,9 +59,9 @@ export default {
         });
     },
     buyBundle() {
-      var Cnt = prompt("시행횟수를 입력해 주세요", 0);
+      // var Cnt = prompt("시행횟수를 입력해 주세요", 0);
       axios
-        .get(addr + "/buyBundle/" + Cnt)
+        .get(addr + "/buyBundle/" + this.Cnt)
         .then((response) => {
           console.log(response.data);
           this.buyBundleData = response.data;
