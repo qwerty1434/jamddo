@@ -9,6 +9,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
+    hikari:
+      leak-detection-threshold: 3000
+#      maximum-pool-size: 128
 
   jpa:
     hibernate:
@@ -20,6 +23,17 @@ spring:
     hibernate:
       format_sql: true
 
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+  sql:
+    init:
+      mode: never
+
+
+logging:
+  level:
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE

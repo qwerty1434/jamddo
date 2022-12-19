@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SimulationService {
     private final Lotto lotto;
-    private final WinInfoRepository winInfoRepository;
+    private final WinInfoService winInfoRepository;
 
     @Transactional
     public LottoDto buy(){
@@ -29,13 +29,13 @@ public class SimulationService {
     @Transactional
     public BuyResultDto buyOne(){
         LottoDto myLotto = buy();
-        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
+        WinInfoDto winInfoDto = winInfoRepository.infoOfThisWeek();
         return scoring(myLotto,winInfoDto);
     }
 
     @Transactional
     public List<BuyResultDto> buyBundle(int Cnt){
-        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
+        WinInfoDto winInfoDto = winInfoRepository.infoOfThisWeek();
         List<BuyResultDto> result = new ArrayList<>();
         for (int i = 0; i < Cnt; i++) {
             LottoDto myLotto = buy();
@@ -55,7 +55,7 @@ public class SimulationService {
         int cnt = 0;
         long money = 0;
         int[] notFirstButPrize = new int[4];
-        WinInfoDto winInfoDto = winInfoRepository.InfoOfThisWeek();
+        WinInfoDto winInfoDto = winInfoRepository.infoOfThisWeek();
         while(true){
             cnt++;
             money+=1000;

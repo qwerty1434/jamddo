@@ -30,8 +30,8 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
                         winNum.sixthNum,
                         winNum.bonusNum
                 ))
-                .from(winInfo)
-                .orderBy(winInfo.id.desc())
+                .from(winNum)
+                .orderBy(winNum.id.desc())
                 .fetchFirst();
     }
 
@@ -57,6 +57,7 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
                         winInfo.fourthPrizeBeneficiaryNum
                 ))
                 .from(winInfo)
+                .innerJoin(winInfo.winNum,winNum)
                 .orderBy(winInfo.id.desc())
                 .fetchFirst();
     }
@@ -73,7 +74,7 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
                         winNum.sixthNum,
                         winNum.bonusNum
                 ))
-                .from(winInfo)
+                .from(winNum)
                 .fetch();
 
         int[] statisticResult = new int[46];

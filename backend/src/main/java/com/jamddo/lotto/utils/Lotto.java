@@ -14,7 +14,6 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 @Component
 public class Lotto {
-    private final WinInfoRepository winInfoRepository;
 
 
     public LottoDto Generate(){
