@@ -37,9 +37,10 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
 
     @Override
     public WinInfoDto InfoOfThisWeek() {
-        return queryFactory
+        WinInfoDto winInfoDto = queryFactory
                 .select(Projections.constructor(WinInfoDto.class,
-                        winInfo.id,
+//                        winInfo.id, // 안됨, 에러뜸
+                        winNum.id, // 됨
                         winNum.firstNum,
                         winNum.secondNum,
                         winNum.thirdNum,
@@ -57,9 +58,10 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
                         winInfo.fourthPrizeBeneficiaryNum
                 ))
                 .from(winInfo)
-                .innerJoin(winInfo.winNum,winNum)
+                .innerJoin(winInfo.winNum, winNum)
                 .orderBy(winInfo.id.desc())
                 .fetchFirst();
+        return winInfoDto;
     }
 
     @Override
