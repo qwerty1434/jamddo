@@ -51,7 +51,6 @@ export default {
       axios
         .get(addr + "/buyOne")
         .then((response) => {
-          console.log(response.data);
           this.buyOneData = response.data;
         })
         .catch((error) => {
