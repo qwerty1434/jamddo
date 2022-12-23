@@ -22,7 +22,8 @@
       게임
       <b-button variant="outline-primary" type="submit">진행</b-button>
     </form>
-    <div>{{ buyBundleData }}</div>
+    <BuybundleComp :data="buyBundleData" />
+    <!-- <div>{{ buyBundleData }}</div> -->
 
     <b-button variant="outline-primary" v-on:click="buyUntilFirstPlace">
       1등 나올때까지 진행
@@ -35,13 +36,14 @@
 const addr = "http://localhost:8080/simulation";
 import axios from "axios";
 import BuyoneComp from "@/components/BuyoneComp";
+import BuybundleComp from "@/components/BuybundleComp";
 export default {
   name: "HomeView",
-  components: { BuyoneComp },
+  components: { BuyoneComp, BuybundleComp },
   data() {
     return {
       buyOneData: null,
-      buyBundleData: null,
+      buyBundleData: [],
       buyUntilFirstPlaceData: null,
       Cnt: 5,
     };
@@ -58,7 +60,6 @@ export default {
         });
     },
     buyBundle() {
-      // var Cnt = prompt("시행횟수를 입력해 주세요", 0);
       axios
         .get(addr + "/buyBundle/" + this.Cnt)
         .then((response) => {

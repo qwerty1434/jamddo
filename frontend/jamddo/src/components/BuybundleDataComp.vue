@@ -1,16 +1,5 @@
 <template>
   <div>
-    <div v-if="data.rank == -1">낙점</div>
-    <div v-else-if="data.rank >= 2">등수: {{ data.rank }}등</div>
-    <div v-else>등수: {{ data.rank }}등</div>
-    <div v-if="isFirst == true">
-      <div>
-        <h4>1등입니다</h4>
-        <p>와 1등!!</p>
-      </div>
-    </div>
-
-    <div>상금: {{ data.myPrize | moneyFilter }}원</div>
     <div>
       내 로또번호
       <div class="outer">
@@ -33,18 +22,21 @@
           {{ data.lottoDto.sixthNum }}
         </div>
       </div>
+      <div class="outer">
+        <div class="inner">결과:</div>
+        <div v-if="data.rank == -1" class="inner">낙점</div>
+        <div v-else class="inner">{{ data.rank }}등</div>
+        <div class="inner">
+          &nbsp; &amp; 상금: {{ data.myPrize | moneyFilter }}원
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "buyone-comp",
-  data() {
-    return {
-      isFirst: false,
-    };
-  },
+  name: "Buybundle-data-comp",
   props: {
     data: {
       type: Object,
@@ -57,17 +49,6 @@ export default {
           lottoDto: Object,
         };
       },
-    },
-  },
-  watch: {
-    data() {
-      if (this.data.rank == 1) {
-        this.isFirst = true;
-        alert("1등이다!!");
-        // alert("1등?! 오늘 로또각?");
-      } else {
-        this.isFirst = false;
-      }
     },
   },
   methods: {
@@ -112,5 +93,13 @@ export default {
 }
 .greenBall {
   background-color: #b0d840;
+}
+.outer {
+  display: inline-block;
+  text-align: center;
+  margin: 5px;
+}
+.inner {
+  display: inline-block;
 }
 </style>
