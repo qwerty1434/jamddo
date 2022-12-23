@@ -87,7 +87,7 @@ public class Lotto {
                 .rank(rank)
                 .winningPrize(winningPrize)
                 .beneficiaryNum(beneficiaryNum)
-                .myPrize(winningPrize/beneficiaryNum)
+                .myPrize(winningPrize)
                 .lottoDto(lotto)
                 .build();
     }
