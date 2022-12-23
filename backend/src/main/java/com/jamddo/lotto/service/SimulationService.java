@@ -78,12 +78,17 @@ public class SimulationService {
 
         // 얼마의 이득 혹은 손해를 봤는지
         long profit =
-                winInfoDto.getFirstPrize() / winInfoDto.getFirstPrizeBeneficiaryNum()
-                + (notFirstButPrize[0] *( winInfoDto.getSecondPrize()) / winInfoDto.getSecondPrizeBeneficiaryNum())
-                + (notFirstButPrize[1] *( winInfoDto.getThirdNum()) / winInfoDto.getThirdPrizeBeneficiaryNum())
-                + (notFirstButPrize[2] *( winInfoDto.getFourthNum()) / winInfoDto.getFourthPrizeBeneficiaryNum())
+                winInfoDto.getFirstPrize()
+                + (notFirstButPrize[0] *( winInfoDto.getSecondPrize()))
+                + (notFirstButPrize[1] *( winInfoDto.getThirdPrize()))
+                + (notFirstButPrize[2] *( winInfoDto.getFourthPrize()))
                 + notFirstButPrize[3] *(5000)
                 - money;
+
+//        System.out.println("1등 상금:" +winInfoDto.getFirstPrize());
+//        System.out.println("2등 상금:" +notFirstButPrize[0] +"||"+( winInfoDto.getSecondPrize()));
+//        System.out.println("3등 상금:" +notFirstButPrize[1] +"||"+( winInfoDto.getThirdPrize()));
+//        System.out.println("4등 상금:" +notFirstButPrize[2] +"||"+( winInfoDto.getFourthPrize()));
 
 
         return BuyUtilFirstPlaceDto.builder()
