@@ -22,6 +22,7 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
     public WinningNumDto winningNumOfThisWeek() {
         return queryFactory
                 .select(Projections.constructor(WinningNumDto.class,
+                        winNum.id,
                         winNum.firstNum,
                         winNum.secondNum,
                         winNum.thirdNum,
@@ -41,8 +42,8 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
 //        System.out.println(winInfo.getClass());
         WinInfoDto winInfoDto = queryFactory
                 .select(Projections.constructor(WinInfoDto.class,
-                        winInfo.id, // 안됨, 에러뜸
-//                        winNum.id, // 됨
+//                        winInfo.id, // 안됨, 에러뜸
+                        winNum.id, // 됨
 //                        winNum.winInfo.id, // 됨
                         winNum.firstNum,
                         winNum.secondNum,

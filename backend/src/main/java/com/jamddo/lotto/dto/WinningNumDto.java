@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class WinningNumDto {
+    private long round;
     private int firstNum;
     private int secondNum;
     private int thirdNum;
