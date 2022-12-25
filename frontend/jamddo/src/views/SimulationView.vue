@@ -28,7 +28,7 @@
     <b-button variant="outline-primary" v-on:click="buyUntilFirstPlace">
       1등 나올때까지 진행
     </b-button>
-    <div>{{ buyUntilFirstPlaceData }}</div>
+    <BuyUntilFirstComp :data="buyUntilFirstPlaceData" />
   </div>
 </template>
 
@@ -37,9 +37,10 @@ const addr = "http://localhost:8080/simulation";
 import axios from "axios";
 import BuyoneComp from "@/components/BuyoneComp";
 import BuybundleComp from "@/components/BuybundleComp";
+import BuyUntilFirstComp from "@/components/BuyUntilFirstComp.vue";
 export default {
-  name: "HomeView",
-  components: { BuyoneComp, BuybundleComp },
+  name: "SimulationView",
+  components: { BuyoneComp, BuybundleComp, BuyUntilFirstComp },
   data() {
     return {
       buyOneData: null,
