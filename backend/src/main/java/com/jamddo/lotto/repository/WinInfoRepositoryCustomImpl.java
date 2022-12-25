@@ -72,6 +72,7 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
     public NumStatisticDto NumStatistic() {
         List<WinningNumDto> result = queryFactory
                 .select(Projections.constructor(WinningNumDto.class,
+                        winNum.id,
                         winNum.firstNum,
                         winNum.secondNum,
                         winNum.thirdNum,
