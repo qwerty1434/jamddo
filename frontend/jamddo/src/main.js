@@ -10,7 +10,7 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 // 전역 필터
-Vue.filter("moneyFilter", function (value) {
+Vue.filter("numFilter", function (value) {
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 });
 

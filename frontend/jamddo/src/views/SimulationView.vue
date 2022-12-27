@@ -4,7 +4,7 @@
     <b-button variant="outline-primary" v-on:click="buyOne"
       >1게임 진행</b-button
     >
-    <!-- <div>{{ buyOneData }}</div> -->
+
     <BuyoneComp :data="buyOneData" />
     <!-- <div v-for="(item, index) in buyOneData" :key="index">{{ item }}</div> -->
 
@@ -54,6 +54,7 @@ export default {
       axios
         .get(addr + "/buyOne")
         .then((response) => {
+          console.log(response);
           this.buyOneData = response.data;
         })
         .catch((error) => {
@@ -75,6 +76,7 @@ export default {
       axios
         .get(addr + "/untilFirstPlace")
         .then((response) => {
+          console.log(response);
           this.buyUntilFirstPlaceData = response.data;
         })
         .catch((error) => {

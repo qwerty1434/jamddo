@@ -27,7 +27,7 @@
         <div v-if="data.rank == -1" class="inner">낙점</div>
         <div v-else class="inner">{{ data.rank }}등</div>
         <div class="inner">
-          &nbsp; &amp; 상금: {{ data.myPrize | moneyFilter }}원
+          &nbsp; &amp; 상금: {{ data.myPrize | numFilter }}원
         </div>
       </div>
     </div>

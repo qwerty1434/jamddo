@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div>상금: {{ data.myPrize | moneyFilter }}원</div>
+    <div>상금: {{ data.myPrize | numFilter }}원</div>
     <div>
       내 로또번호
       <div class="outer">
