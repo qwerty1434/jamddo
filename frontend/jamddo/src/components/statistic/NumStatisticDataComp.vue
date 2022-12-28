@@ -68,7 +68,9 @@
 <script>
 export default {
   name: "num-statistic-data-comp",
-  data() {},
+  data() {
+    return {};
+  },
   props: {
     data: {},
   },

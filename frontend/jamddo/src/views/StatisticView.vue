@@ -16,19 +16,18 @@
   </div>
 </template>
 
+//
 <script>
 const addr = "http://localhost:8080/info";
 import axios from "axios";
 import WinningNumComp from "@/components/statistic/WinningNumComp.vue";
 import OverviewComp from "@/components/statistic/OverviewComp.vue";
-// import ColorStatisticDataComp from "@/components/statistic/ColorStatisticDataComp.vue";
-import NumStatisticDataComp from "@/components/statistic/NumStatisticDataComp.vue";
+import NumStatisticDataComp from "@/components/statistic/NumstatisticDataComp.vue";
 export default {
   name: "StatisticView",
   components: {
     WinningNumComp,
     OverviewComp,
-    // ColorStatisticDataComp,
     NumStatisticDataComp,
   },
   data() {
@@ -67,16 +66,6 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-    // axios
-    //   .get(addr + "/statistics/number/color")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     this.ColorStatisticData = response.data;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   },
-  methods: {},
 };
 </script>

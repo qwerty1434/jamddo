@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import SimulationView from "../views/SimulationView.vue";
+import SimulationView from "@/views/SimulationView.vue";
+import StatisticView from "@/views/StatisticView.vue";
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,8 @@ const routes = [
   {
     path: "/statistic",
     name: "statistic",
-    component: () => import("../views/StatisticView.vue"), // 이렇게도 가능하고 위에꺼처럼도 가능한거 같음. 약간 동적로딩처럼 사용시점에 가져오는 느낌인듯.
+    // component: () => import("../views/StatisticView.vue"), // 이렇게도 가능하고 위에꺼처럼도 가능한거 같음. 약간 동적로딩처럼 사용시점에 가져오는 느낌인듯.
+    component: StatisticView,
   },
 ];
 
