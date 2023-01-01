@@ -53,6 +53,18 @@ public class SimulationController {
         }
     }
 
+    @ApiOperation(value ="이번주 1등 정보를 숫자만 반환, 당첨된 번호에 하이라이트 처리할 때 사용")
+    @GetMapping("/winningNumOnly")
+    public ResponseEntity winningNumOnly(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    simulationService.winningNumOnly()
+            );
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 
 
 }

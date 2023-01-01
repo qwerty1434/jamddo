@@ -1,9 +1,6 @@
 package com.jamddo.lotto.service;
 
-import com.jamddo.lotto.dto.ColorStatisticDto;
-import com.jamddo.lotto.dto.NumStatisticDto;
-import com.jamddo.lotto.dto.WinInfoDto;
-import com.jamddo.lotto.dto.WinningNumDto;
+import com.jamddo.lotto.dto.*;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,4 +48,17 @@ public class WinInfoService {
         return ColorStatisticDto.builder().colorStatistic(colorStatistic).build();
     }
 
+    @Transactional
+    public WinningNumArrOnlyDto WinningNumOnly(){
+        int[] winningNumArr = new int[6];
+        WinningNumDto result = winInfoRepository.winningNumOfThisWeek();
+        winningNumArr[0] = result.getFifthNum();
+        winningNumArr[1] = result.getSecondNum();
+        winningNumArr[2] = result.getThirdNum();
+        winningNumArr[3] = result.getFourthNum();
+        winningNumArr[4] = result.getFifthNum();
+        winningNumArr[5] = result.getSixthNum();
+        return WinningNumArrOnlyDto.builder().winningNumArr(winningNumArr).build();
+
+    }
 }

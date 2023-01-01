@@ -98,4 +98,9 @@ public class SimulationService {
                 .profit(profit)
                 .build();
     }
+
+    @Transactional
+    public WinningNumArrOnlyDto winningNumOnly(){
+        return winInfoRepository.WinningNumOnly();
+    }
 }
