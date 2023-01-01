@@ -5,10 +5,9 @@
       >1게임 진행</b-button
     >
 
-    <BuyoneComp :data="buyOneData" />
-    <!-- <div v-for="(item, index) in buyOneData" :key="index">{{ item }}</div> -->
+    <BuyoneComp :data="buyOneData" :winningNumOnly="winningNumOnly" />
 
-    <!-- <button v-on:click="buyBundle()">로또N번 구매</button> -->
+    <h1>테스트만 해보기</h1>
 
     <form v-on:submit.prevent="buyBundle">
       연속
@@ -23,7 +22,6 @@
       <b-button variant="outline-primary" type="submit">진행</b-button>
     </form>
     <BuybundleComp :data="buyBundleData" />
-    <!-- <div>{{ buyBundleData }}</div> -->
 
     <b-button variant="outline-primary" v-on:click="buyUntilFirstPlace">
       1등 나올때까지 진행
@@ -43,18 +41,28 @@ export default {
   components: { BuyoneComp, BuybundleComp, BuyUntilFirstComp },
   data() {
     return {
+      winningNumOnly: null,
       buyOneData: null,
       buyBundleData: [],
       buyUntilFirstPlaceData: null,
       Cnt: 5,
     };
   },
+  created() {
+    axios
+      .get(addr + "/winningNumOnly")
+      .then((response) => {
+        this.winningNumOnly = response.data.winningNumArr;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   methods: {
     buyOne() {
       axios
         .get(addr + "/buyOne")
         .then((response) => {
-          console.log(response);
           this.buyOneData = response.data;
         })
         .catch((error) => {
@@ -65,7 +73,6 @@ export default {
       axios
         .get(addr + "/buyBundle/" + this.Cnt)
         .then((response) => {
-          console.log(response.data);
           this.buyBundleData = response.data;
         })
         .catch((error) => {
@@ -76,7 +83,6 @@ export default {
       axios
         .get(addr + "/untilFirstPlace")
         .then((response) => {
-          console.log(response);
           this.buyUntilFirstPlaceData = response.data;
         })
         .catch((error) => {

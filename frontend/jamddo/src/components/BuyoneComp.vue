@@ -1,5 +1,63 @@
 <template>
   <div>
+    <div>
+      <div class="outer">
+        <div
+          :class="[
+            ballColor(data.lottoDto.firstNum),
+            isWonNum(data.lottoDto.firstNum),
+          ]"
+          class="ball"
+        >
+          {{ data.lottoDto.firstNum }}
+        </div>
+        <div
+          :class="[
+            ballColor(data.lottoDto.secondNum),
+            isWonNum(data.lottoDto.secondNum),
+          ]"
+          class="ball"
+        >
+          {{ data.lottoDto.secondNum }}
+        </div>
+        <div
+          :class="[
+            ballColor(data.lottoDto.thirdNum),
+            isWonNum(data.lottoDto.thirdNum),
+          ]"
+          class="ball"
+        >
+          {{ data.lottoDto.thirdNum }}
+        </div>
+        <div
+          :class="[
+            ballColor(data.lottoDto.fourthNum),
+            isWonNum(data.lottoDto.fourthNum),
+          ]"
+          class="ball"
+        >
+          {{ data.lottoDto.fourthNum }}
+        </div>
+        <div
+          :class="[
+            ballColor(data.lottoDto.fifthNum),
+            isWonNum(data.lottoDto.fifthNum),
+          ]"
+          class="ball"
+        >
+          {{ data.lottoDto.fifthNum }}
+        </div>
+        <div
+          :class="[
+            ballColor(data.lottoDto.sixthNum),
+            isWonNum(data.lottoDto.sixthNum),
+          ]"
+          class="ball"
+        >
+          {{ data.lottoDto.sixthNum }}
+        </div>
+      </div>
+    </div>
     <div v-if="data.rank == -1">낙점</div>
     <div v-else-if="data.rank >= 2">등수: {{ data.rank }}등</div>
     <div v-else>등수: {{ data.rank }}등</div>
@@ -11,29 +69,6 @@
     </div>
 
     <div>상금: {{ data.myPrize | numFilter }}원</div>
-    <div>
-      내 로또번호
-      <div class="outer">
-        <div :class="ballColor(data.lottoDto.firstNum)" class="ball">
-          {{ data.lottoDto.firstNum }}
-        </div>
-        <div :class="ballColor(data.lottoDto.secondNum)" class="ball">
-          {{ data.lottoDto.secondNum }}
-        </div>
-        <div :class="ballColor(data.lottoDto.thirdNum)" class="ball">
-          {{ data.lottoDto.thirdNum }}
-        </div>
-        <div :class="ballColor(data.lottoDto.fourthNum)" class="ball">
-          {{ data.lottoDto.fourthNum }}
-        </div>
-        <div :class="ballColor(data.lottoDto.fifthNum)" class="ball">
-          {{ data.lottoDto.fifthNum }}
-        </div>
-        <div :class="ballColor(data.lottoDto.sixthNum)" class="ball">
-          {{ data.lottoDto.sixthNum }}
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -57,6 +92,9 @@ export default {
           lottoDto: Object,
         };
       },
+    },
+    winningNumOnly: {
+      type: Object,
     },
   },
   watch: {
@@ -82,6 +120,13 @@ export default {
         return "greyBall";
       } else if (41 <= num && num <= 45) {
         return "greenBall";
+      }
+    },
+
+    isWonNum(num) {
+      console.log(this.winningNumOnly);
+      for (let i = 0; i < 6; i++) {
+        if (this.winningNumOnly[i] == num) return "wonNum";
       }
     },
   },
@@ -112,5 +157,9 @@ export default {
 }
 .greenBall {
   background-color: #b0d840;
+}
+.wonNum {
+  color: black !important;
+  /* https://codepen.io/maaarj/pen/YZReoK */
 }
 </style>

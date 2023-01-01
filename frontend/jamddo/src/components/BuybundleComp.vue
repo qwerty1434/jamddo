@@ -25,7 +25,7 @@ export default {
   components: { BuybundleDataComp },
   data() {
     return {
-      viewAll: "true",
+      viewAll: "false",
     };
   },
   props: {

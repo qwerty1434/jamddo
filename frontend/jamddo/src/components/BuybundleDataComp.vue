@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      내 로또번호
       <div class="outer">
         <div :class="ballColor(data.lottoDto.firstNum)" class="ball">
           {{ data.lottoDto.firstNum }}
@@ -22,13 +21,13 @@
           {{ data.lottoDto.sixthNum }}
         </div>
       </div>
-      <div class="outer">
-        <div class="inner">결과:</div>
-        <div v-if="data.rank == -1" class="inner">낙점</div>
-        <div v-else class="inner">{{ data.rank }}등</div>
-        <div class="inner">
-          &nbsp; &amp; 상금: {{ data.myPrize | numFilter }}원
-        </div>
+    </div>
+    <div class="outer">
+      <div class="inner">결과:</div>
+      <div v-if="data.rank == -1" class="inner">낙점</div>
+      <div v-else class="inner">{{ data.rank }}등</div>
+      <div class="inner">
+        &nbsp; &amp; 상금: {{ data.myPrize | numFilter }}원
       </div>
     </div>
   </div>

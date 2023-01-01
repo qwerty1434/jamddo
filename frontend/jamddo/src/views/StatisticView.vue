@@ -10,13 +10,9 @@
 
     <h2>당첨번호 통계</h2>
     <NumStatisticDataComp :data="NumStatisticData" />
-
-    <!-- <h2>당첨번호 통계 - 색상별로 묶기</h2>
-    <ColorStatisticDataComp :data="ColorStatisticData" /> -->
   </div>
 </template>
 
-//
 <script>
 const addr = "http://localhost:8080/info";
 import axios from "axios";
@@ -35,14 +31,12 @@ export default {
       WinningNumData: "",
       OverviewData: "",
       NumStatisticData: "",
-      ColorStatisticData: "",
     };
   },
   created() {
     axios
       .get(addr + "/winningNum")
       .then((response) => {
-        console.log(response.data);
         this.WinningNumData = response.data;
       })
       .catch((error) => {
@@ -51,7 +45,6 @@ export default {
     axios
       .get(addr + "/overview")
       .then((response) => {
-        console.log(response.data);
         this.OverviewData = response.data;
       })
       .catch((error) => {
@@ -60,7 +53,6 @@ export default {
     axios
       .get(addr + "/statistics/number")
       .then((response) => {
-        console.log(response.data);
         this.NumStatisticData = response.data;
       })
       .catch((error) => {
