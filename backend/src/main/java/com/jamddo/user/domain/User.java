@@ -1,15 +1,13 @@
 package com.jamddo.user.domain;
 
-import com.jamddo.board.domain.Board;
-import com.jamddo.board.domain.Comment;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,12 +24,6 @@ public class User {
 
     private String password;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Board> boardList = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Comment> commentList = new ArrayList<>();
 
 }
