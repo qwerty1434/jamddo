@@ -9,29 +9,50 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.jamddo.global.exception.ErrorCode.ALREADY_REGISTERED_MEMBER;
+import static com.jamddo.global.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository memberRepository;
+    private final UserRepository userRepository;
     @Transactional
     public void signup(SignupDto signupDto) {
         // 이미 존재하는 아이디
-        if(memberRepository.existsByNickname(signupDto.getNickname())){
+        if(userRepository.existsByNickname(signupDto.getNickname())){
             throw new CustomException(ALREADY_REGISTERED_MEMBER);
         }
         // 아이디 등록
         User user = User.builder()
                 .nickname(signupDto.getNickname())
                 .password(signupDto.getPassword())
+                .point(0L)
                 .build();
 
-        memberRepository.save(user);
+        userRepository.save(user);
 
     }
 
     @Transactional
-    public void login(LoginDto loginDto) {
+    public boolean login(LoginDto loginDto) {
+        User user = userRepository.findByNickname(loginDto.getNickname()).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+        if(user.getPassword().equals(loginDto.getPassword())){
+            return true; // 로그인 성공
+        }else{
+            throw new CustomException(NOT_CORRECT_PASSWORD);
+        }
     }
+
+    @Transactional
+    public void resetPoint(LoginDto loginDto){
+        User user = userRepository.findByNickname(loginDto.getNickname()).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+        user.pointReset();
+    }
+
+    @Transactional
+    public void substractPoint(LoginDto loginDto){
+        User user = userRepository.findByNickname(loginDto.getNickname()).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+        user.substractPoint();
+    }
+
+
 }

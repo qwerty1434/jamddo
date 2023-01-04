@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -49,6 +46,7 @@ public class UserController {
     }
 
     // 로그인
+    @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginDto loginDto){
         try{
             userService.login(loginDto);
@@ -59,4 +57,27 @@ public class UserController {
     }
 
     // 로그아웃
+
+    // 포인트 차감
+    @PostMapping("/substractpoint")
+    public ResponseEntity substractPoint(@RequestBody LoginDto loginDto){
+        try{
+            userService.substractPoint(loginDto);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    // 포인트 리셋
+    @PostMapping("/resetpoint")
+    public ResponseEntity resetPoint(@RequestBody LoginDto loginDto){
+        try{
+            userService.resetPoint(loginDto);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
 }

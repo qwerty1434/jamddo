@@ -24,6 +24,16 @@ public class User {
 
     private String password;
 
+    private Long point;
+
+    public void pointReset(){
+        this.point = 0L;
+    }
+
+    public void substractPoint(){
+        this.point -= 1000L;
+    }
+
 
 
 }
