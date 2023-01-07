@@ -2,7 +2,8 @@
   <div id="app">
     <nav>
       <router-link to="/">Simulation</router-link> |
-      <router-link to="/statistic">Statistic</router-link>
+      <router-link to="/statistic">Statistic</router-link> |
+      <router-link to="/rank">Ranking</router-link>
     </nav>
     <router-view />
   </div>
