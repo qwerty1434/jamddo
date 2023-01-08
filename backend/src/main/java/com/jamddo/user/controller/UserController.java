@@ -80,4 +80,14 @@ public class UserController {
         }
     }
 
+    @GetMapping("/ranking")
+    public ResponseEntity ranking(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    userService.ranking()
+            );
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 }

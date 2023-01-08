@@ -3,11 +3,14 @@ package com.jamddo.user.service;
 import com.jamddo.global.exception.CustomException;
 import com.jamddo.user.domain.User;
 import com.jamddo.user.dto.LoginDto;
+import com.jamddo.user.dto.RankingDto;
 import com.jamddo.user.dto.SignupDto;
 import com.jamddo.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static com.jamddo.global.exception.ErrorCode.*;
 
@@ -52,6 +55,11 @@ public class UserService {
     public void substractPoint(LoginDto loginDto){
         User user = userRepository.findByNickname(loginDto.getNickname()).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
         user.substractPoint();
+    }
+
+    @Transactional
+    public List<RankingDto> ranking(){
+        return userRepository.findAllOrderByPriceDesc();
     }
 
 
