@@ -24,7 +24,7 @@ public class User {
 
     private String password;
 
-    private Long point;
+    private long point;
 
     public void pointReset(){
         this.point = 0L;

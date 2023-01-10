@@ -19,7 +19,7 @@ import java.util.Map;
 import static com.jamddo.global.exception.ErrorCode.NOT_EQUAL_PASSWORD;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
