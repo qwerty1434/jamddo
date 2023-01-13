@@ -7,6 +7,7 @@ import com.jamddo.user.dto.RankingDto;
 import com.jamddo.user.dto.SignupDto;
 import com.jamddo.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ import static com.jamddo.global.exception.ErrorCode.*;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
     @Transactional
     public void signup(SignupDto signupDto) {
         // 이미 존재하는 아이디
@@ -27,7 +30,7 @@ public class UserService {
         // 아이디 등록
         User user = User.builder()
                 .nickname(signupDto.getNickname())
-                .password(signupDto.getPassword())
+                .password(passwordEncoder.encode(signupDto.getPassword()))
                 .point(0L)
                 .build();
 

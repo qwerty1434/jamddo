@@ -41,7 +41,7 @@ public class UserController {
                 throw new CustomException(NOT_EQUAL_PASSWORD);
             }
             userService.signup(signupDto);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.status(HttpStatus.OK).body("회원가입에 성공했습니다.");
         }
     }
 
