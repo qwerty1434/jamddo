@@ -4,7 +4,6 @@
     <b-button variant="outline-primary" v-on:click="buyOne"
       >1게임 진행</b-button
     >
-
     <BuyoneComp :data="buyOneData" :winningNumOnly="winningNumOnly" />
 
     <h1>테스트만 해보기</h1>
@@ -35,7 +34,7 @@ const addr = "http://localhost:8080/simulation";
 import axios from "axios";
 import BuyoneComp from "@/components/BuyoneComp";
 import BuybundleComp from "@/components/BuybundleComp";
-import BuyUntilFirstComp from "@/components/BuyUntilFirstComp.vue";
+import BuyUntilFirstComp from "@/components/BuyUntilFirstComp";
 export default {
   name: "SimulationView",
   components: { BuyoneComp, BuybundleComp, BuyUntilFirstComp },
