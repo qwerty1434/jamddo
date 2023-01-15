@@ -41,7 +41,8 @@ public class UserService {
     @Transactional
     public boolean login(LoginDto loginDto) {
         User user = userRepository.findByNickname(loginDto.getNickname()).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
-        if(user.getPassword().equals(loginDto.getPassword())){
+
+        if(passwordEncoder.matches(loginDto.getPassword(), user.getPassword())){ // 패스워드 비교 시 equals가 아니라 matches로 비교
             return true; // 로그인 성공
         }else{
             throw new CustomException(NOT_CORRECT_PASSWORD);
