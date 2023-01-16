@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ProfileComp />
     <div>
       <div class="outer">
         <div
@@ -74,10 +73,8 @@
 </template>
 
 <script>
-import ProfileComp from "@/components/ProfileComp";
 export default {
   name: "buyone-comp",
-  components: { ProfileComp },
   data() {
     return {
       isFirst: false,

@@ -1,6 +1,8 @@
 <template>
   <div class="home">
     <h1>여기는 시뮬레이션</h1>
+    <ProfileComp />
+
     <b-button variant="outline-primary" v-on:click="buyOne"
       >1게임 진행</b-button
     >
@@ -35,9 +37,11 @@ import axios from "axios";
 import BuyoneComp from "@/components/BuyoneComp";
 import BuybundleComp from "@/components/BuybundleComp";
 import BuyUntilFirstComp from "@/components/BuyUntilFirstComp";
+import ProfileComp from "@/components/ProfileComp";
+
 export default {
   name: "SimulationView",
-  components: { BuyoneComp, BuybundleComp, BuyUntilFirstComp },
+  components: { BuyoneComp, BuybundleComp, BuyUntilFirstComp, ProfileComp },
   data() {
     return {
       winningNumOnly: null,

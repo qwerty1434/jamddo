@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>닉네임</div>
-    <img class="profile" src="@/assets/basicProfile.png" />
-    <div>포인트</div>
-    <div>
+    <div v-if="!LoginToken">
       <b-button variant="outline-success" v-b-modal="'LoginModal'"
         >로그인</b-button
       >
@@ -13,7 +10,6 @@
         ref="modal"
         title="로그인"
         @show="resetModal"
-        @hidden="resetModal"
         @ok="Login"
       >
         <form ref="form">
@@ -72,6 +68,13 @@
         </form>
       </b-modal>
     </div>
+    <div v-else>
+      <b-button variant="outline-success" @click="Logout">로그아웃</b-button>
+    </div>
+
+    <div>{{ UserNickname }}</div>
+    <img class="profile" src="@/assets/basicProfile.png" />
+    <div>{{ UserPoint }}</div>
   </div>
 </template>
 <script>
@@ -86,8 +89,12 @@ export default {
       SignupNickname: "",
       SignupPassword: "",
       SignupPasswordConfirm: "",
+      UserNickname: "익명",
+      UserPoint: 0,
+      LoginToken: false,
     };
   },
+
   methods: {
     Login() {
       axios
@@ -96,11 +103,24 @@ export default {
           password: this.LoginPassword,
         })
         .then((response) => {
-          console.log(response);
+          this.UserNickname = response.data.nickname;
+          this.UserPoint = response.data.point;
+          this.LoginToken = true;
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    Logout() {
+      this.LoginNickname = "";
+      this.LoginPassword = "";
+      this.SignupNickname = "";
+      this.SignupPassword = "";
+      this.SignupPasswordConfirm = "";
+      this.UserNickname = "익명";
+      this.UserPoint = 0;
+      this.LoginToken = false;
+      // Bearer 토큰 제거
     },
     SignIn() {
       axios
@@ -122,13 +142,16 @@ export default {
       this.SignupNickname = "";
       this.SignupPassword = "";
       this.SignupPasswordConfirm = "";
+      this.UserNickname = "익명";
+      this.UserPoint = 0;
+      this.LoginToken = false;
     },
   },
 };
 </script>
 <style>
 .profile {
-  width: 300px;
-  height: 300px;
+  width: 50px;
+  height: 50px;
 }
 </style>
