@@ -4,6 +4,7 @@ import com.jamddo.global.exception.CustomException;
 import com.jamddo.global.exception.CustomValidationException;
 import com.jamddo.user.dto.LoginDto;
 import com.jamddo.user.dto.SignupDto;
+import com.jamddo.user.service.AuthService;
 import com.jamddo.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import static com.jamddo.global.exception.ErrorCode.NOT_EQUAL_PASSWORD;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AuthService authService;
 
     // 회원가입
     @PostMapping("/signup")
@@ -49,8 +51,9 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginDto loginDto){
         try{
-            userService.login(loginDto);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.status(HttpStatus.OK)
+                    .headers(authService.authorize(loginDto))
+                    .body(userService.login(loginDto));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

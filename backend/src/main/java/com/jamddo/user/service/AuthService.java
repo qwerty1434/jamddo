@@ -1,9 +1,10 @@
-package com.jamddo.user.controller;
+package com.jamddo.user.service;
 
 import com.jamddo.global.jwt.JwtFilter;
 import com.jamddo.global.jwt.TokenProvider;
 import com.jamddo.user.dto.LoginDto;
 import com.jamddo.user.dto.TokenDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,26 +12,20 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@RestController
-@RequestMapping("/api")
-public class AuthController {
+@Service
+@RequiredArgsConstructor
+public class AuthService {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
-        this.tokenProvider = tokenProvider;
-        this.authenticationManagerBuilder = authenticationManagerBuilder;
-    }
-
-    @PostMapping("/authenticate")
-    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
+    @Transactional
+    public HttpHeaders authorize(LoginDto loginDto) {
         System.out.println("authenticate 시작!!!!!!!!!!!!!!!!");
         // username, password를 통해 AuthenticationToken객체를 생성
         UsernamePasswordAuthenticationToken authenticationToken =
@@ -51,8 +46,7 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         System.out.println("jwt = " + jwt+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
-        // jwt token을 TokenDto를 통해 body에 넣어서 보내줌
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        return httpHeaders;
     }
+
 }
