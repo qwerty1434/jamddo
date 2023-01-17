@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!LoginToken">
+    <div v-if="authorizationToken == '' || authorizationToken == null">
       <b-button variant="outline-success" v-b-modal="'LoginModal'"
         >로그인</b-button
       >
@@ -91,10 +91,9 @@ export default {
       SignupPasswordConfirm: "",
       UserNickname: "익명",
       UserPoint: 0,
-      LoginToken: false,
+      authorizationToken: localStorage.getItem("authorization"),
     };
   },
-
   methods: {
     Login() {
       axios
@@ -105,7 +104,12 @@ export default {
         .then((response) => {
           this.UserNickname = response.data.nickname;
           this.UserPoint = response.data.point;
-          this.LoginToken = true;
+          this.authorizationToken = response.headers["authorization"];
+          // 로컬 스토리지 저장
+          localStorage.setItem(
+            "authorization",
+            response.headers["authorization"]
+          );
         })
         .catch((error) => {
           console.log(error);
@@ -119,8 +123,9 @@ export default {
       this.SignupPasswordConfirm = "";
       this.UserNickname = "익명";
       this.UserPoint = 0;
-      this.LoginToken = false;
-      // Bearer 토큰 제거
+      this.authorizationToken = "";
+      // 로컬 스토리지 제거
+      localStorage.removeItem("authorization");
     },
     SignIn() {
       axios
@@ -144,7 +149,7 @@ export default {
       this.SignupPasswordConfirm = "";
       this.UserNickname = "익명";
       this.UserPoint = 0;
-      this.LoginToken = false;
+      this.authorizationToken = "";
     },
   },
 };

@@ -94,7 +94,7 @@ export default {
       },
     },
     winningNumOnly: {
-      type: Object,
+      type: Array,
     },
   },
   watch: {

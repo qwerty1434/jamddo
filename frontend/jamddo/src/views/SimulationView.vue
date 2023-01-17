@@ -63,6 +63,18 @@ export default {
   },
   methods: {
     buyOne() {
+      if (localStorage.getItem("authorization") != null) {
+        // 헤더에 담아서 보내기
+        const headers = { token: localStorage.getItem("authorization") };
+        axios
+          .post("http://localhost:8080/user/substractpoint", { headers })
+          .then((response) => {
+            this.buyOneData = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
       axios
         .get(addr + "/buyOne")
         .then((response) => {
