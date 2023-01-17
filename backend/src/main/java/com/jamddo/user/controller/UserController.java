@@ -63,9 +63,10 @@ public class UserController {
 
     // 포인트 차감
     @PostMapping("/substractpoint")
-    public ResponseEntity substractPoint(@RequestBody LoginDto loginDto){
+    public ResponseEntity substractPoint(@RequestHeader("headers") String header){
+        System.out.println("header = " + header);
         try{
-            userService.substractPoint(loginDto);
+//            userService.substractPoint(loginDto);
             return ResponseEntity.status(HttpStatus.OK).build();
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -74,9 +75,9 @@ public class UserController {
 
     // 포인트 리셋
     @PostMapping("/resetpoint")
-    public ResponseEntity resetPoint(@RequestBody LoginDto loginDto){
+    public ResponseEntity resetPoint(@RequestHeader("headers") String header){
         try{
-            userService.resetPoint(loginDto);
+//            userService.resetPoint(loginDto);
             return ResponseEntity.status(HttpStatus.OK).build();
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
