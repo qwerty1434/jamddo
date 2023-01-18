@@ -72,9 +72,9 @@
       <b-button variant="outline-success" @click="Logout">로그아웃</b-button>
     </div>
 
-    <div>{{ UserNickname }}</div>
+    <div>{{ data.nickname }}</div>
     <img class="profile" src="@/assets/basicProfile.png" />
-    <div>{{ UserPoint }}</div>
+    <div>{{ data.point }}</div>
   </div>
 </template>
 <script>
@@ -91,9 +91,20 @@ export default {
       SignupPasswordConfirm: "",
       UserNickname: "익명",
       UserPoint: 0,
-      authorizationToken: localStorage.getItem("authorization"),
+      authorizationToken: "",
     };
   },
+  props: {
+    data: {
+      default: () => {
+        return {
+          nickname: "",
+          point: "",
+        };
+      },
+    },
+  },
+
   methods: {
     Login() {
       axios
@@ -110,6 +121,8 @@ export default {
             "authorization",
             response.headers["authorization"]
           );
+          localStorage.setItem("nickname", response.data.nickname);
+          localStorage.setItem("point", response.data.point);
         })
         .catch((error) => {
           console.log(error);
@@ -126,6 +139,8 @@ export default {
       this.authorizationToken = "";
       // 로컬 스토리지 제거
       localStorage.removeItem("authorization");
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("point");
     },
     SignIn() {
       axios
@@ -142,14 +157,14 @@ export default {
         });
     },
     resetModal() {
-      this.LoginNickname = "";
-      this.LoginPassword = "";
-      this.SignupNickname = "";
-      this.SignupPassword = "";
-      this.SignupPasswordConfirm = "";
-      this.UserNickname = "익명";
-      this.UserPoint = 0;
-      this.authorizationToken = "";
+      // this.LoginNickname = "";
+      // this.LoginPassword = "";
+      // this.SignupNickname = "";
+      // this.SignupPassword = "";
+      // this.SignupPasswordConfirm = "";
+      // this.UserNickname = "익명";
+      // this.UserPoint = 0;
+      // this.authorizationToken = "";
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>여기는 시뮬레이션</h1>
-    <ProfileComp />
+    <ProfileComp :data="userData" />
 
     <b-button variant="outline-primary" v-on:click="buyOne"
       >1게임 진행</b-button
@@ -49,6 +49,7 @@ export default {
       buyBundleData: [],
       buyUntilFirstPlaceData: null,
       Cnt: 5,
+      userData: "",
     };
   },
   created() {
@@ -64,12 +65,28 @@ export default {
   methods: {
     buyOne() {
       if (localStorage.getItem("authorization") != null) {
-        // 헤더에 담아서 보내기
-        const headers = { token: localStorage.getItem("authorization") };
+        // 헤더에 토큰 담아서 보내기
+        const headers = {
+          Authorization: localStorage.getItem("authorization"),
+        };
+        console.log("헤더에 토큰담아서 보내기!!!!");
         axios
-          .post("http://localhost:8080/user/substractpoint", { headers })
+          .post(
+            "http://localhost:8080/user/substractpoint",
+            {}, // body부분, 빈값이라도 넣어두지 않으면 header를 body로 인식하는듯
+            {
+              headers: headers,
+            }
+          )
           .then((response) => {
-            this.buyOneData = response.data;
+            console.log(response);
+            localStorage.setItem("nickname", response.data.nickname);
+            localStorage.setItem("point", response.data.point);
+            this.userData = {
+              nickname: response.data.nickname,
+              point: response.data.point,
+            };
+            console.log(this.userData);
           })
           .catch((error) => {
             console.log(error);
