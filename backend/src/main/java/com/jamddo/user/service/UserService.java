@@ -1,17 +1,21 @@
 package com.jamddo.user.service;
 
 import com.jamddo.global.exception.CustomException;
+import com.jamddo.global.jwt.TokenProvider;
 import com.jamddo.user.domain.User;
 import com.jamddo.user.dto.LoginDto;
 import com.jamddo.user.dto.UserResponseDto;
 import com.jamddo.user.dto.RankingDto;
 import com.jamddo.user.dto.SignupDto;
 import com.jamddo.user.repository.UserRepository;
+import com.jamddo.user.util.SecurityUtil;
+import io.jsonwebtoken.io.Decoders;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Security;
 import java.util.List;
 
 import static com.jamddo.global.exception.ErrorCode.*;
@@ -21,6 +25,8 @@ import static com.jamddo.global.exception.ErrorCode.*;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    private final TokenProvider tokenProvider;
 
     @Transactional
     public void signup(SignupDto signupDto) {
@@ -51,17 +57,31 @@ public class UserService {
         }
     }
 
+    @Transactional
+    public UserResponseDto userState(){
+        String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
+        User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).build();
+
+    }
+
 
     @Transactional
-    public void resetPoint(LoginDto loginDto){
-        User user = userRepository.findByNickname(loginDto.getNickname()).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
-        user.pointReset();
+    public UserResponseDto resetPoint(){
+        String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
+        User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+        user.substractPoint();
+        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).build();
+
     }
 
     @Transactional
-    public void substractPoint(LoginDto loginDto){
-        User user = userRepository.findByNickname(loginDto.getNickname()).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+    public UserResponseDto substractPoint(){
+        String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
+        User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
         user.substractPoint();
+        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).build();
+
     }
 
     @Transactional

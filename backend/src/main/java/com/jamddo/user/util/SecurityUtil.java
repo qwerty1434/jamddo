@@ -18,7 +18,6 @@ public class SecurityUtil {
     public static Optional<String> getCurrentUsername() {
         // SecurityContextHolder에 값이 저장되는 건 JwtFilter의 doFilter메서드를 실행하는 시점
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         if (authentication == null) {
             logger.debug("Security Context에 인증 정보가 없습니다.");
             return Optional.empty();

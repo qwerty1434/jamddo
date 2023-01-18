@@ -60,14 +60,25 @@ public class UserController {
     }
 
     // 로그아웃
+    
+    // 토큰을 함께 전송했을 때 유저정보 반환
+    @GetMapping("/state")
+    public ResponseEntity state(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(userService.userState());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    
 
     // 포인트 차감
     @PostMapping("/substractpoint")
-    public ResponseEntity substractPoint(@RequestHeader("headers") String header){
-        System.out.println("header = " + header);
+    public ResponseEntity substractPoint(){
         try{
-//            userService.substractPoint(loginDto);
-            return ResponseEntity.status(HttpStatus.OK).build();
+
+            return ResponseEntity.status(HttpStatus.OK).body(userService.substractPoint());
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -75,10 +86,10 @@ public class UserController {
 
     // 포인트 리셋
     @PostMapping("/resetpoint")
-    public ResponseEntity resetPoint(@RequestHeader("headers") String header){
+    public ResponseEntity resetPoint(){
         try{
-//            userService.resetPoint(loginDto);
-            return ResponseEntity.status(HttpStatus.OK).build();
+
+            return ResponseEntity.status(HttpStatus.OK).body(userService.resetPoint());
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
