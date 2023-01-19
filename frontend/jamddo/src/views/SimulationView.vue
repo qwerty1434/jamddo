@@ -64,38 +64,36 @@ export default {
   },
   methods: {
     buyOne() {
-      if (localStorage.getItem("authorization") != null) {
-        // 헤더에 토큰 담아서 보내기
-        const headers = {
-          Authorization: localStorage.getItem("authorization"),
-        };
-        console.log("헤더에 토큰담아서 보내기!!!!");
-        axios
-          .post(
-            "http://localhost:8080/user/substractpoint",
-            {}, // body부분, 빈값이라도 넣어두지 않으면 header를 body로 인식하는듯
-            {
-              headers: headers,
-            }
-          )
-          .then((response) => {
-            console.log(response);
-            localStorage.setItem("nickname", response.data.nickname);
-            localStorage.setItem("point", response.data.point);
-            this.userData = {
-              nickname: response.data.nickname,
-              point: response.data.point,
-            };
-            console.log(this.userData);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      // 헤더에 토큰 담아서 보내기
+      const headers = {
+        Authorization: localStorage.getItem("authorization"),
+      };
       axios
-        .get(addr + "/buyOne")
+        .get(addr + "/buyOne", {
+          params: {},
+          headers: headers,
+        })
         .then((response) => {
           this.buyOneData = response.data;
+          axios
+            .post(
+              "http://localhost:8080/user/substractpoint",
+              {}, // body부분, 빈값이라도 넣어두지 않으면 header를 body로 인식하는듯
+              {
+                headers: headers,
+              }
+            )
+            .then((response) => {
+              localStorage.setItem("nickname", response.data.nickname);
+              localStorage.setItem("point", response.data.point);
+              this.userData = {
+                nickname: response.data.nickname,
+                point: response.data.point,
+              };
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           console.log(error);

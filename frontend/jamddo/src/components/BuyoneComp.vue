@@ -124,7 +124,6 @@ export default {
     },
 
     isWonNum(num) {
-      console.log(this.winningNumOnly);
       for (let i = 0; i < 6; i++) {
         if (this.winningNumOnly[i] == num) return "wonNum";
       }

@@ -22,6 +22,7 @@
           </b-form-group>
           <b-form-group label="비밀번호" label-for="pwd-input">
             <b-form-input
+              type="password"
               id="password-input"
               required
               v-model="LoginPassword"
@@ -54,6 +55,7 @@
           <b-form-group label="비밀번호" label-for="pwd-input">
             <b-form-input
               id="password-input"
+              type="password"
               required
               v-model="SignupPassword"
             ></b-form-input>
@@ -61,6 +63,7 @@
           <b-form-group label="비밀번호확인" label-for="pwd-input">
             <b-form-input
               id="password-input"
+              type="password"
               required
               v-model="SignupPasswordConfirm"
             ></b-form-input>
@@ -72,9 +75,9 @@
       <b-button variant="outline-success" @click="Logout">로그아웃</b-button>
     </div>
 
-    <div>{{ data.nickname }}</div>
+    <div>{{ UserNickname }}</div>
     <img class="profile" src="@/assets/basicProfile.png" />
-    <div>{{ data.point }}</div>
+    <div>{{ UserPoint }}</div>
   </div>
 </template>
 <script>
@@ -89,11 +92,21 @@ export default {
       SignupNickname: "",
       SignupPassword: "",
       SignupPasswordConfirm: "",
-      UserNickname: "익명",
-      UserPoint: 0,
-      authorizationToken: "",
+      UserNickname:
+        localStorage.getItem("nickname") == null
+          ? "익명"
+          : localStorage.getItem("nickname"),
+      UserPoint:
+        localStorage.getItem("point") == null
+          ? 0
+          : localStorage.getItem("point"),
+      authorizationToken:
+        localStorage.getItem("authorization") == null
+          ? ""
+          : localStorage.getItem("authorization"),
     };
   },
+
   props: {
     data: {
       default: () => {
@@ -102,6 +115,13 @@ export default {
           point: "",
         };
       },
+    },
+  },
+  watch: {
+    data() {
+      this.UserNickname = this.data.nickname;
+      this.UserPoint = this.data.point;
+      console.log(this.data.nickname);
     },
   },
 
