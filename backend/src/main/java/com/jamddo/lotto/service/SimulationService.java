@@ -1,8 +1,12 @@
 package com.jamddo.lotto.service;
 
+import com.jamddo.global.exception.CustomException;
 import com.jamddo.lotto.dto.*;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import com.jamddo.lotto.utils.Lotto;
+import com.jamddo.user.domain.User;
+import com.jamddo.user.repository.UserRepository;
+import com.jamddo.user.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,13 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
+import static com.jamddo.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class SimulationService {
     private final Lotto lotto;
-    private final WinInfoService winInfoRepository;
+    private final WinInfoService winInfoService;
+    private final UserRepository userRepository;
 
     @Transactional
     public LottoDto buy(){
@@ -29,13 +37,21 @@ public class SimulationService {
     @Transactional
     public BuyResultDto buyOne(){
         LottoDto myLotto = buy();
-        WinInfoDto winInfoDto = winInfoRepository.infoOfThisWeek();
-        return scoring(myLotto,winInfoDto);
+        WinInfoDto winInfoDto = winInfoService.infoOfThisWeek();
+        BuyResultDto result =  scoring(myLotto,winInfoDto);
+        String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
+        if(!nickname.equals("anonymousUser")){
+            User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+            user.addPoint(result.getWinningPrize());
+        }
+
+
+        return result;
     }
 
     @Transactional
     public List<BuyResultDto> buyBundle(int Cnt){
-        WinInfoDto winInfoDto = winInfoRepository.infoOfThisWeek();
+        WinInfoDto winInfoDto = winInfoService.infoOfThisWeek();
         List<BuyResultDto> result = new ArrayList<>();
         for (int i = 0; i < Cnt; i++) {
             LottoDto myLotto = buy();
@@ -55,7 +71,7 @@ public class SimulationService {
         int cnt = 0;
         long money = 0;
         int[] notFirstButPrize = new int[4];
-        WinInfoDto winInfoDto = winInfoRepository.infoOfThisWeek();
+        WinInfoDto winInfoDto = winInfoService.infoOfThisWeek();
         while(true){
             cnt++;
             money+=1000;
@@ -101,6 +117,6 @@ public class SimulationService {
 
     @Transactional
     public WinningNumArrOnlyDto winningNumOnly(){
-        return winInfoRepository.WinningNumOnly();
+        return winInfoService.WinningNumOnly();
     }
 }

@@ -33,6 +33,9 @@ public class User {
     public void substractPoint(){
         this.point -= 1000L;
     }
+    public void addPoint(long point){
+        this.point += point;
+    }
 
 
 
