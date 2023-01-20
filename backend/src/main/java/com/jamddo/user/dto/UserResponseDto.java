@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class UserResponseDto {
     private String nickname;
     private long point;
+    private long cnt;
+
 }

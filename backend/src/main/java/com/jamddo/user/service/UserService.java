@@ -51,7 +51,7 @@ public class UserService {
 
         if(passwordEncoder.matches(loginDto.getPassword(), user.getPassword())){ // 패스워드 비교 시 equals가 아니라 matches로 비교
 
-            return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).build(); // 로그인 성공
+            return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).cnt(user.getCnt()).build(); // 로그인 성공
         }else{
             throw new CustomException(NOT_CORRECT_PASSWORD);
         }
@@ -61,7 +61,7 @@ public class UserService {
     public UserResponseDto userState(){
         String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
         User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
-        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).build();
+        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).cnt(user.getCnt()).build();
 
     }
 
@@ -70,8 +70,8 @@ public class UserService {
     public UserResponseDto resetPoint(){
         String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
         User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
-        user.substractPoint();
-        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).build();
+        user.Reset();
+        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).cnt(user.getCnt()).build();
 
     }
 
@@ -80,13 +80,13 @@ public class UserService {
         String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
         User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
         user.substractPoint();
-        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).build();
+        return UserResponseDto.builder().nickname(user.getNickname()).point(user.getPoint()).cnt(user.getCnt()).build();
 
     }
 
     @Transactional
     public List<RankingDto> ranking(){
-        return userRepository.findAllOrderByPriceDesc();
+        return userRepository.findAllOrderByPriceAndCntDesc();
     }
 
 

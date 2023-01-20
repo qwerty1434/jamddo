@@ -25,9 +25,11 @@ public class User {
     private String password;
 
     private long point;
+    private long cnt;
 
-    public void pointReset(){
+    public void Reset(){
         this.point = 0L;
+        this.cnt = 0L;
     }
 
     public void substractPoint(){
@@ -35,6 +37,9 @@ public class User {
     }
     public void addPoint(long point){
         this.point += point;
+    }
+    public void addCnt(){
+        this.cnt+=1;
     }
 
 

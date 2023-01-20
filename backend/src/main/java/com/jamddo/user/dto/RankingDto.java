@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class RankingDto {
     private String nickname;
     private Long point;
+    private Long cnt;
 }

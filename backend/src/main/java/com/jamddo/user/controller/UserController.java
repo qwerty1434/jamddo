@@ -85,7 +85,7 @@ public class UserController {
     }
 
     // 포인트 리셋
-    @PostMapping("/resetpoint")
+    @GetMapping("/resetpoint")
     public ResponseEntity resetPoint(){
         try{
 

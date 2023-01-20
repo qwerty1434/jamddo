@@ -18,14 +18,15 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
     }
 
     @Override
-    public List<RankingDto> findAllOrderByPriceDesc() {
+    public List<RankingDto> findAllOrderByPriceAndCntDesc() {
         return queryFactory
                 .select(Projections.constructor(RankingDto.class,
                     user.nickname,
-                    user.point
+                    user.point,
+                    user.cnt
                 ))
                 .from(user)
-                .orderBy(user.point.desc())
+                .orderBy(user.point.desc(), user.cnt.asc())
                 .fetch();
     }
 }

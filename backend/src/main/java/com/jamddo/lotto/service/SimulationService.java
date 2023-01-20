@@ -42,6 +42,7 @@ public class SimulationService {
         String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
         if(!nickname.equals("anonymousUser")){
             User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+            user.addCnt();
             user.addPoint(result.getWinningPrize());
         }
 
