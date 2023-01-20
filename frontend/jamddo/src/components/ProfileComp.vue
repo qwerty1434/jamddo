@@ -77,7 +77,10 @@
 
     <div>{{ UserNickname }}</div>
     <img class="profile" src="@/assets/basicProfile.png" />
-    <div>{{ UserPoint }}</div>
+    <div>
+      {{ UserPoint | numFilter }}원 | {{ UserCnt | numFilter }}회 |
+      <span class="initialization" @click="resetPoint">초기화</span>
+    </div>
   </div>
 </template>
 <script>
@@ -100,6 +103,8 @@ export default {
         localStorage.getItem("point") == null
           ? 0
           : localStorage.getItem("point"),
+      UserCnt:
+        localStorage.getItem("cnt") == null ? 0 : localStorage.getItem("cnt"),
       authorizationToken:
         localStorage.getItem("authorization") == null
           ? ""
@@ -113,6 +118,7 @@ export default {
         return {
           nickname: "",
           point: "",
+          cnt: "",
         };
       },
     },
@@ -121,7 +127,7 @@ export default {
     data() {
       this.UserNickname = this.data.nickname;
       this.UserPoint = this.data.point;
-      console.log(this.data.nickname);
+      this.UserCnt = this.data.cnt;
     },
   },
 
@@ -135,6 +141,7 @@ export default {
         .then((response) => {
           this.UserNickname = response.data.nickname;
           this.UserPoint = response.data.point;
+          this.UserCnt = response.data.cnt;
           this.authorizationToken = response.headers["authorization"];
           // 로컬 스토리지 저장
           localStorage.setItem(
@@ -143,6 +150,7 @@ export default {
           );
           localStorage.setItem("nickname", response.data.nickname);
           localStorage.setItem("point", response.data.point);
+          localStorage.setItem("cnt", response.data.cnt);
         })
         .catch((error) => {
           console.log(error);
@@ -156,11 +164,13 @@ export default {
       this.SignupPasswordConfirm = "";
       this.UserNickname = "익명";
       this.UserPoint = 0;
+      this.UserCnt = 0;
       this.authorizationToken = "";
       // 로컬 스토리지 제거
       localStorage.removeItem("authorization");
       localStorage.removeItem("nickname");
       localStorage.removeItem("point");
+      localStorage.removeItem("cnt");
     },
     SignIn() {
       axios
@@ -186,6 +196,32 @@ export default {
       // this.UserPoint = 0;
       // this.authorizationToken = "";
     },
+    resetPoint() {
+      if (confirm("정말 초기화하시겠습니까??") == true) {
+        //확인
+        const headers = {
+          Authorization: localStorage.getItem("authorization"),
+        };
+        axios
+          .get(addr + "/resetpoint", {
+            params: {},
+            headers: headers,
+          })
+          .then((response) => {
+            localStorage.setItem("point", response.data.point);
+            localStorage.setItem("cnt", response.data.cnt);
+            this.UserPoint = response.data.point;
+            this.UserCnt = response.data.cnt;
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        //취소
+        return;
+      }
+    },
   },
 };
 </script>
@@ -193,5 +229,12 @@ export default {
 .profile {
   width: 50px;
   height: 50px;
+}
+.initialization {
+  color: blue;
+}
+.initialization:hover {
+  cursor: pointer;
+  color: green;
 }
 </style>

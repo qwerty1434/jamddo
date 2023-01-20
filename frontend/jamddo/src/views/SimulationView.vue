@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>여기는 시뮬레이션</h1>
+    <h1>시뮬레이션</h1>
     <ProfileComp :data="userData" />
 
     <b-button variant="outline-primary" v-on:click="buyOne"
@@ -8,7 +8,8 @@
     >
     <BuyoneComp :data="buyOneData" :winningNumOnly="winningNumOnly" />
 
-    <h1>테스트만 해보기</h1>
+    <hr />
+    <h1>테스트만 해볼래요</h1>
 
     <form v-on:submit.prevent="buyBundle">
       연속
@@ -86,9 +87,11 @@ export default {
             .then((response) => {
               localStorage.setItem("nickname", response.data.nickname);
               localStorage.setItem("point", response.data.point);
+              localStorage.setItem("cnt", response.data.cnt);
               this.userData = {
                 nickname: response.data.nickname,
                 point: response.data.point,
+                cnt: response.data.cnt,
               };
             })
             .catch((error) => {
