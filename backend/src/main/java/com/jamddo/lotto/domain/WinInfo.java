@@ -1,6 +1,5 @@
 package com.jamddo.lotto.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,7 @@ public class WinInfo {
 
     // 당첨일자
     @DateTimeFormat(pattern="yyyy.MM.dd")
-    LocalDate date;
+    private LocalDate date;
 
     @OneToOne
     @JoinColumn(name = "winNum_id")

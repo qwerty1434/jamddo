@@ -1,15 +1,13 @@
 package com.jamddo.lotto.controller;
 
 
+
 import com.jamddo.lotto.service.WinInfoService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -53,7 +51,7 @@ public class WinInfoController {
     }
     @ApiOperation(value ="당첨번호 통계 - 색상별로 묶기")
     @GetMapping("/statistics/number/color")
-    public ResponseEntity ColorStatistic(){
+    public ResponseEntity colorStatistic(){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(
                     winInfoService.ColorStatistic()
@@ -62,5 +60,8 @@ public class WinInfoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
+
+
 
 }
