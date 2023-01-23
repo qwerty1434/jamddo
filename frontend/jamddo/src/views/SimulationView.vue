@@ -1,11 +1,9 @@
 <template>
   <div class="home">
-    <h1>시뮬레이션</h1>
+    <h1>로또 시뮬레이션</h1>
     <ProfileComp :data="userData" />
 
-    <b-button variant="outline-primary" v-on:click="buyOne"
-      >1게임 진행</b-button
-    >
+    <b-button variant="outline-primary" v-on:click="buyOne">시작</b-button>
     <BuyoneComp :data="buyOneData" :winningNumOnly="winningNumOnly" />
 
     <hr />

@@ -9,23 +9,23 @@
         </tr>
         <tr>
           <td>1등</td>
-          <td>{{ data.firstPrizeBeneficiaryNum }}</td>
-          <td>{{ data.firstPrize | numFilter }}</td>
+          <td>{{ data.firstPrizeBeneficiaryNum }}명</td>
+          <td>{{ data.firstPrize | numFilter }}원</td>
         </tr>
         <tr>
           <td>2등</td>
-          <td>{{ data.secondPrizeBeneficiaryNum }}</td>
-          <td>{{ data.secondPrize | numFilter }}</td>
+          <td>{{ data.secondPrizeBeneficiaryNum }}명</td>
+          <td>{{ data.secondPrize | numFilter }}원</td>
         </tr>
         <tr>
           <td>3등</td>
-          <td>{{ data.thirdPrizeBeneficiaryNum | numFilter }}</td>
-          <td>{{ data.thirdPrize | numFilter }}</td>
+          <td>{{ data.thirdPrizeBeneficiaryNum | numFilter }}명</td>
+          <td>{{ data.thirdPrize | numFilter }}원</td>
         </tr>
         <tr>
           <td>4등</td>
-          <td>{{ data.fourthPrizeBeneficiaryNum | numFilter }}</td>
-          <td>{{ data.fourthPrize | numFilter }}</td>
+          <td>{{ data.fourthPrizeBeneficiaryNum | numFilter }}명</td>
+          <td>{{ data.fourthPrize | numFilter }}원</td>
         </tr>
       </table>
     </div>

@@ -1,65 +1,63 @@
 <template>
-  <div>
-    <div class="outer">
-      <div class="group">
-        <div
-          class="set"
-          v-for="(item, index) in this.data.statisticResult.slice(1, 11)"
-          v-bind:key="index"
-        >
-          <div :class="ballColor(index)" class="ball">{{ index + 1 }}번</div>
-          <div>{{ item }} 회</div>
-        </div>
+  <div class="outer">
+    <div class="group">
+      <div
+        class="set"
+        v-for="(item, index) in this.data.statisticResult.slice(1, 11)"
+        v-bind:key="index"
+      >
+        <div :class="ballColor(index)" class="ball">{{ index + 1 }}번</div>
+        <div>{{ item }} 회</div>
       </div>
+    </div>
 
-      <div class="group">
-        <div
-          class="set"
-          v-for="(item, index) in this.data.statisticResult.slice(11, 21)"
-          v-bind:key="index + 11"
-        >
-          <div :class="ballColor(index + 11)" class="ball">
-            {{ index + 11 }}번
-          </div>
-          <div>{{ item }} 회</div>
+    <div class="group">
+      <div
+        class="set"
+        v-for="(item, index) in this.data.statisticResult.slice(11, 21)"
+        v-bind:key="index + 11"
+      >
+        <div :class="ballColor(index + 11)" class="ball">
+          {{ index + 11 }}번
         </div>
+        <div>{{ item }} 회</div>
       </div>
+    </div>
 
-      <div class="group">
-        <div
-          class="set"
-          v-for="(item, index) in this.data.statisticResult.slice(21, 31)"
-          v-bind:key="index + 21"
-        >
-          <div :class="ballColor(index + 21)" class="ball">
-            {{ index + 21 }}번
-          </div>
-          <div>{{ item }} 회</div>
+    <div class="group">
+      <div
+        class="set"
+        v-for="(item, index) in this.data.statisticResult.slice(21, 31)"
+        v-bind:key="index + 21"
+      >
+        <div :class="ballColor(index + 21)" class="ball">
+          {{ index + 21 }}번
         </div>
+        <div>{{ item }} 회</div>
       </div>
-      <div class="group">
-        <div
-          class="set"
-          v-for="(item, index) in this.data.statisticResult.slice(31, 41)"
-          v-bind:key="index + 31"
-        >
-          <div :class="ballColor(index + 31)" class="ball">
-            {{ index + 31 }}번
-          </div>
-          <div>{{ item }} 회</div>
+    </div>
+    <div class="group">
+      <div
+        class="set"
+        v-for="(item, index) in this.data.statisticResult.slice(31, 41)"
+        v-bind:key="index + 31"
+      >
+        <div :class="ballColor(index + 31)" class="ball">
+          {{ index + 31 }}번
         </div>
+        <div>{{ item }} 회</div>
       </div>
-      <div class="group">
-        <div
-          class="set"
-          v-for="(item, index) in this.data.statisticResult.slice(41, 46)"
-          v-bind:key="index + 41"
-        >
-          <div :class="ballColor(index + 41)" class="ball">
-            {{ index + 41 }}번
-          </div>
-          <div>{{ item }} 회</div>
+    </div>
+    <div class="group">
+      <div
+        class="set"
+        v-for="(item, index) in this.data.statisticResult.slice(41, 46)"
+        v-bind:key="index + 41"
+      >
+        <div :class="ballColor(index + 41)" class="ball">
+          {{ index + 41 }}번
         </div>
+        <div>{{ item }} 회</div>
       </div>
     </div>
   </div>

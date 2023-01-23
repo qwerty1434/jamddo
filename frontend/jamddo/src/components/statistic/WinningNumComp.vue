@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>{{ data.round }}회 당첨번호</div>
     <div>
       <div class="outer">
         <div :class="ballColor(data.firstNum)" class="ball">

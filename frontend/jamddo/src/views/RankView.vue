@@ -1,7 +1,20 @@
 <template>
   <div>
-    랭킹페이지
-    {{ RankingData }}
+    <h1>랭킹 정보</h1>
+    <table class="rankTable">
+      <tr>
+        <td>랭킹</td>
+        <td>아이디</td>
+        <td>점수</td>
+        <td>게임 횟수</td>
+      </tr>
+      <tr v-for="(item, index) in this.RankingData" v-bind:key="index">
+        <td>{{ index + 1 }}등</td>
+        <td>{{ item.nickname }}</td>
+        <td>{{ item.point | numFilter }}p</td>
+        <td>{{ item.cnt | numFilter }}회</td>
+      </tr>
+    </table>
   </div>
 </template>
 <script>
@@ -26,3 +39,9 @@ export default {
   },
 };
 </script>
+<style>
+.rankTable {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

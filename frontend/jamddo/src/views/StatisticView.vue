@@ -1,14 +1,14 @@
 <template>
   <div class="home">
-    <h1>여기는 통계</h1>
+    <h1>로또 자료</h1>
 
-    <h2>이번주 1위 당첨정보</h2>
+    <h2>{{ this.WinningNumData.round }}회 당첨번호</h2>
     <WinningNumComp :data="WinningNumData" />
-
-    <h2>이번주 회차, 당첨번호, 상금, 당첨자 수</h2>
+    <br />
+    <h2>{{ this.WinningNumData.round }}회 당첨정보</h2>
     <OverviewComp :data="OverviewData" />
-
-    <h2>당첨번호 통계</h2>
+    <br />
+    <h2>이전 당첨번호 통계</h2>
     <NumStatisticDataComp :data="NumStatisticData" />
   </div>
 </template>
