@@ -13,6 +13,7 @@
         <td>{{ item.nickname }}</td>
         <td>{{ item.point | numFilter }}p</td>
         <td>{{ item.cnt | numFilter }}회</td>
+        <td v-if="item.nickname == UserNickname">나</td>
       </tr>
     </table>
   </div>
@@ -25,6 +26,7 @@ export default {
   data() {
     return {
       RankingData: "",
+      UserNickname: localStorage.getItem("nickname"),
     };
   },
   created() {
