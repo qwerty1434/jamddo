@@ -7,26 +7,30 @@
     <BuyoneComp :data="buyOneData" :winningNumOnly="winningNumOnly" />
 
     <hr />
+
     <h1>테스트만 해볼래요</h1>
+    <div class="BundleGame">
+      <form v-on:submit.prevent="buyBundle">
+        연속
+        <input
+          v-model="Cnt"
+          type="number"
+          value="5"
+          max="500"
+          style="width: 70px"
+        />
+        게임
+        <b-button variant="outline-primary" type="submit">진행</b-button>
+      </form>
+      <BuybundleComp :data="buyBundleData" />
+    </div>
 
-    <form v-on:submit.prevent="buyBundle">
-      연속
-      <input
-        v-model="Cnt"
-        type="number"
-        value="5"
-        max="500"
-        style="width: 70px"
-      />
-      게임
-      <b-button variant="outline-primary" type="submit">진행</b-button>
-    </form>
-    <BuybundleComp :data="buyBundleData" />
-
-    <b-button variant="outline-primary" v-on:click="buyUntilFirstPlace">
-      1등 나올때까지 진행
-    </b-button>
-    <BuyUntilFirstComp :data="buyUntilFirstPlaceData" />
+    <div class="UntilFirstGame">
+      <b-button variant="outline-primary" v-on:click="buyUntilFirstPlace">
+        1등 나올때까지 진행
+      </b-button>
+      <BuyUntilFirstComp :data="buyUntilFirstPlaceData" />
+    </div>
   </div>
 </template>
 
@@ -123,3 +127,19 @@ export default {
   },
 };
 </script>
+<style>
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+}
+.blink {
+  animation: blink-effect 1s step-end infinite;
+  /* 
+        animation-name: blink-effect; 
+        animation-duration: 1s; 
+        animation-iteration-count:infinite; 
+        animation-timing-function:step-end; 
+    */
+}
+</style>

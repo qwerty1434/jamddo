@@ -78,8 +78,10 @@
     <div>{{ UserNickname }}</div>
     <img class="profile" src="@/assets/basicProfile.png" />
     <div>
-      {{ UserPoint | numFilter }}p | {{ UserCnt | numFilter }}회 |
-      <span class="initialization" @click="resetPoint">초기화</span>
+      {{ UserPoint | numFilter }}p ({{ UserCnt | numFilter }}회)
+      <div>
+        <span class="initialization" @click="resetPoint">포인트 초기화</span>
+      </div>
     </div>
   </div>
 </template>
