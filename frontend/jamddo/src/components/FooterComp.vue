@@ -2,7 +2,9 @@
   <footer>
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-      <div>잼또 로고</div>
+      <div>
+        <img src="@/assets/logo.png" alt="logo" width="30" height="30" />
+      </div>
       <div>
         <span>created by</span
         ><span style="font-weight: bold"> qwerty1434</span>
@@ -17,12 +19,7 @@
       </a>
       |
       <a href="https://github.com/qwerty1434/jamddo" target="_blank">
-        <img
-          src="@/assets/github-mark.png"
-          alt="connact"
-          width="30"
-          height="30"
-        />
+        <img src="@/assets/github-mark.png" alt="code" width="30" height="30" />
       </a>
       <br />
       © 2023. qwerty1434 all rights reserved

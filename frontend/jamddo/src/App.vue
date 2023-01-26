@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      로고 넣고싶어
+      <img src="@/assets/jamddo-logo.png" alt="logo" />
       <nav>
         <router-link to="/">게임하기</router-link> |
         <router-link to="/rank">랭킹보기</router-link> |
