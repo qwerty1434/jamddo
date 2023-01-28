@@ -5,9 +5,11 @@ import com.jamddo.lotto.dto.BuyUtilFirstPlaceDto;
 import com.jamddo.lotto.dto.LottoDto;
 import com.jamddo.lotto.repository.WinInfoRepository;
 import com.jamddo.lotto.utils.Lotto;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 
 import javax.transaction.Transactional;
 
@@ -21,24 +23,23 @@ class SimulationServiceTest {
     SimulationService simulationService;
 
     @Test
+    @WithAnonymousUser
     public void 한개_구매(){
         BuyResultDto result = simulationService.buyOne();
-        System.out.println("result = " + result.toString());
+        Assertions.assertThatNoException();
     }
 
     @Test
     public void Cnt개_구매(){
         int Cnt = 10;
         List<BuyResultDto> result = simulationService.buyBundle(Cnt);
-        for (BuyResultDto buyResultDto : result) {
-            System.out.println("buyResultDto = " + buyResultDto);
-        }
+        Assertions.assertThatNoException();
     }
 
     @Test
     public void 우승할때까지_구매(){
         BuyUtilFirstPlaceDto result = simulationService.untilFirstPlace();
-        System.out.println("result = " + result);
+        Assertions.assertThatNoException();
     }
 
 }

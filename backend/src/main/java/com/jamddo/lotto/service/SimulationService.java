@@ -38,15 +38,14 @@ public class SimulationService {
     public BuyResultDto buyOne(){
         LottoDto myLotto = buy();
         WinInfoDto winInfoDto = winInfoService.infoOfThisWeek();
-        BuyResultDto result =  scoring(myLotto,winInfoDto);
+        BuyResultDto result = scoring(myLotto,winInfoDto);
         String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
-        if(!nickname.equals("anonymousUser")){
-            User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
-            user.addCnt();
-            user.addPoint(result.getWinningPrize());
-        }
 
+        if(nickname.equals("anonymousUser") || nickname.equals("anonymous")) return result;
 
+        User user = userRepository.findByNickname(nickname).orElseThrow(()-> new CustomException(MEMBER_NOT_FOUND));
+        user.addCnt();
+        user.addPoint(result.getWinningPrize());
         return result;
     }
 
