@@ -62,7 +62,7 @@ export default {
         this.winningNumOnly = response.data.winningNumArr;
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.response.data);
       });
   },
   methods: {
@@ -97,11 +97,11 @@ export default {
               };
             })
             .catch((error) => {
-              console.log(error);
+              alert(error.response.data);
             });
         })
         .catch((error) => {
-          console.log(error);
+          alert(error.response.data);
         });
     },
     buyBundle() {
@@ -111,7 +111,7 @@ export default {
           this.buyBundleData = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          alert(error.response.data);
         });
     },
     buyUntilFirstPlace() {
@@ -121,7 +121,7 @@ export default {
           this.buyUntilFirstPlaceData = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          alert(error.response.data);
         });
     },
   },

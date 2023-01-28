@@ -42,7 +42,7 @@
         title="회원가입"
         @show="resetModal"
         @hidden="resetModal"
-        @ok="SignIn"
+        @ok="SignUp"
       >
         <form ref="form">
           <b-form-group label="닉네임" label-for="nickname-input">
@@ -155,7 +155,7 @@ export default {
           localStorage.setItem("cnt", response.data.cnt);
         })
         .catch((error) => {
-          console.log(error);
+          alert(error.response.data);
         });
     },
     Logout() {
@@ -174,18 +174,18 @@ export default {
       localStorage.removeItem("point");
       localStorage.removeItem("cnt");
     },
-    SignIn() {
+    SignUp() {
       axios
         .post(addr + "/signup", {
           nickname: this.SignupNickname,
           password: this.SignupPassword,
           passwordConfirm: this.SignupPasswordConfirm,
         })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          alert("회원가입이 완료되었습니다.");
         })
         .catch((error) => {
-          console.log(error);
+          alert(error.response.data);
         });
     },
     resetModal() {
@@ -214,10 +214,9 @@ export default {
             localStorage.setItem("cnt", response.data.cnt);
             this.UserPoint = response.data.point;
             this.UserCnt = response.data.cnt;
-            console.log(response);
           })
           .catch((error) => {
-            console.log(error);
+            alert(error.response.data);
           });
       } else {
         //취소

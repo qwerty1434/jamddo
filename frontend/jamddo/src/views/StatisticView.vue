@@ -40,7 +40,7 @@ export default {
         this.WinningNumData = response.data;
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.response.data);
       });
     axios
       .get(addr + "/overview")
@@ -48,7 +48,7 @@ export default {
         this.OverviewData = response.data;
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.response.data);
       });
     axios
       .get(addr + "/statistics/number")
@@ -56,7 +56,7 @@ export default {
         this.NumStatisticData = response.data;
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.response.data);
       });
   },
 };
