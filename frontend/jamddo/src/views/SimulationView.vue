@@ -96,8 +96,8 @@ export default {
                 cnt: response.data.cnt,
               };
             })
-            .catch((error) => {
-              alert(error.response.data);
+            .catch(() => {
+              // 비로그인 상태로 실행했을 경우
             });
         })
         .catch((error) => {
