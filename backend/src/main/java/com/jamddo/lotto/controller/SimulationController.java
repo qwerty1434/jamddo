@@ -1,5 +1,6 @@
 package com.jamddo.lotto.controller;
 
+import com.jamddo.global.exception.CustomException;
 import com.jamddo.lotto.service.SimulationService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,10 @@ public class SimulationController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     simulationService.buyOne()
             );
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
 
     }
@@ -35,8 +38,10 @@ public class SimulationController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     simulationService.buyBundle(Cnt)
             );
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
 
     }
@@ -48,8 +53,10 @@ public class SimulationController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     simulationService.untilFirstPlace()
             );
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
 
@@ -61,8 +68,10 @@ public class SimulationController {
                     simulationService.winningNumOnly()
             );
 
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
 

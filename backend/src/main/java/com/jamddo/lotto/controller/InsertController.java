@@ -1,5 +1,6 @@
 package com.jamddo.lotto.controller;
 
+import com.jamddo.global.exception.CustomException;
 import com.jamddo.lotto.dto.WinInfoRequestDto;
 import com.jamddo.lotto.dto.WinningNumDto;
 import com.jamddo.lotto.service.InsertService;
@@ -25,8 +26,10 @@ public class InsertController {
         try{
             insertService.number(data);
             return ResponseEntity.status(HttpStatus.OK).build();
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
     @ApiOperation(value ="이번주 당첨 정보 입력")
@@ -35,8 +38,10 @@ public class InsertController {
         try{
             insertService.statistic(data);
             return ResponseEntity.status(HttpStatus.OK).build();
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
 }

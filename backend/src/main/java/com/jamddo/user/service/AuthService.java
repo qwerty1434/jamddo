@@ -26,16 +26,14 @@ public class AuthService {
 
     @Transactional
     public HttpHeaders authorize(LoginDto loginDto) {
-        System.out.println("authenticate 시작!!!!!!!!!!!!!!!!");
         // username, password를 통해 AuthenticationToken객체를 생성
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getNickname(), loginDto.getPassword());
-        System.out.println("authenticationToken = " + authenticationToken);
+
         // authentication 토큰을 이용해 authenticate 메서드가 실행될 때 CustomUserDetailsService의 loadUserByUsername이 실행됨.
         // 실행된 결과값을 가지고 authentication 결과값을 생성하게 됨
-
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        System.out.println("authentication = " + authentication);
+
         // 생성된 authentication 객체를 SecurityContext에 저장
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -45,7 +43,6 @@ public class AuthService {
         // jwt token을 response header에 넣어서 보내줌
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        System.out.println("jwt = " + jwt+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         return httpHeaders;
     }
 

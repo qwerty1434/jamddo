@@ -2,6 +2,7 @@ package com.jamddo.lotto.controller;
 
 
 
+import com.jamddo.global.exception.CustomException;
 import com.jamddo.lotto.service.WinInfoService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,10 @@ public class WinInfoController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     winInfoService.winningNumOfThisWeek()
             );
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
     @ApiOperation(value ="이번주 회차, 당첨번호, 상금, 당첨자 수")
@@ -33,8 +36,10 @@ public class WinInfoController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     winInfoService.infoOfThisWeek()
             );
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
     // 통계 관련
@@ -45,8 +50,10 @@ public class WinInfoController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     winInfoService.NumStatistic()
             );
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
     @ApiOperation(value ="당첨번호 통계 - 색상별로 묶기")
@@ -56,8 +63,10 @@ public class WinInfoController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     winInfoService.ColorStatistic()
             );
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
 

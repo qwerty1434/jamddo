@@ -7,6 +7,7 @@ import com.jamddo.user.dto.SignupDto;
 import com.jamddo.user.service.AuthService;
 import com.jamddo.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 import static com.jamddo.global.exception.ErrorCode.NOT_EQUAL_PASSWORD;
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -35,14 +37,18 @@ public class UserController {
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
-
             throw new CustomValidationException("유효성 검사 실패", errorMap);
         } else {
-
             if (!signupDto.getPassword().equals(signupDto.getPasswordConfirm())) {
-                throw new CustomException(NOT_EQUAL_PASSWORD);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
             }
-            userService.signup(signupDto);
+            try{
+                userService.signup(signupDto);
+            }catch(CustomException e){
+                return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+            }catch(Exception e){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
             return ResponseEntity.status(HttpStatus.OK).body("회원가입에 성공했습니다.");
         }
     }
@@ -54,8 +60,12 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK)
                     .headers(authService.authorize(loginDto))
                     .body(userService.login(loginDto));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }catch(CustomException e){
+            log.error("[로그인 커스텀 에러] {}", e);
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+        }catch(Exception e){
+            log.error("[로그인 에러] {}", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("로그인에 실패했습니다. 아이디 또는 비밀번호를 다시 확인해 주세요");
         }
     }
 
@@ -66,8 +76,10 @@ public class UserController {
     public ResponseEntity state(){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(userService.userState());
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
 
@@ -77,10 +89,9 @@ public class UserController {
     @PostMapping("/substractpoint")
     public ResponseEntity substractPoint(){
         try{
-
             return ResponseEntity.status(HttpStatus.OK).body(userService.substractPoint());
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }catch (CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
         }
     }
 
@@ -88,10 +99,11 @@ public class UserController {
     @GetMapping("/resetpoint")
     public ResponseEntity resetPoint(){
         try{
-
             return ResponseEntity.status(HttpStatus.OK).body(userService.resetPoint());
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
 
@@ -101,8 +113,10 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(
                     userService.ranking()
             );
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }catch(CustomException e){
+            return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알수없는 오류로 요청이 거부됐습니다.");
         }
     }
 }
