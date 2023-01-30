@@ -35,7 +35,8 @@
 </template>
 
 <script>
-const addr = "http://localhost:8080/simulation";
+// const addr = "http://localhost:8080/simulation";
+const addr = process.env.VUE_APP_SERVER_URL + "/simulation";
 import axios from "axios";
 import BuyoneComp from "@/components/BuyoneComp";
 import BuybundleComp from "@/components/BuybundleComp";
@@ -80,7 +81,8 @@ export default {
           this.buyOneData = response.data;
           axios
             .post(
-              "http://localhost:8080/user/substractpoint",
+              // "http://localhost:8080/user/substractpoint",
+              process.env.VUE_APP_SERVER_URL + "/user/substractpoint",
               {}, // body부분, 빈값이라도 넣어두지 않으면 header를 body로 인식하는듯
               {
                 headers: headers,

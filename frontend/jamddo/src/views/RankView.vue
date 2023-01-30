@@ -19,7 +19,8 @@
   </div>
 </template>
 <script>
-const addr = "http://localhost:8080/user";
+// const addr = "http://localhost:8080/user";
+const addr = process.env.VUE_APP_SERVER_URL + "/user";
 import axios from "axios";
 export default {
   name: "RankView",

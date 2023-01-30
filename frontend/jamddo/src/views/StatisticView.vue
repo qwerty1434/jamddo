@@ -14,7 +14,8 @@
 </template>
 
 <script>
-const addr = "http://localhost:8080/info";
+// const addr = "http://localhost:8080/info";
+const addr = process.env.VUE_APP_SERVER_URL + "/info";
 import axios from "axios";
 import WinningNumComp from "@/components/statistic/WinningNumComp.vue";
 import OverviewComp from "@/components/statistic/OverviewComp.vue";
