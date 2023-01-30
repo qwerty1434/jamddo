@@ -5,12 +5,12 @@ spring:
   profiles:
     include: API-KEY
   datasource:
-    url: jdbc:mysql://localhost:3306/jamddo?serverTimezone=Asia/Seoul
+    url: ${MYSQL_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
-    hikari:
-      leak-detection-threshold: 3000
+#    hikari:
+#      leak-detection-threshold: 3000
 #      maximum-pool-size: 128
 
   jpa:
