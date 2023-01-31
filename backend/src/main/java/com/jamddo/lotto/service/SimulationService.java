@@ -20,11 +20,18 @@ import static com.jamddo.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 
 @Service
 @Transactional(readOnly = true)
-@RequiredArgsConstructor
 public class SimulationService {
     private final Lotto lotto;
     private final WinInfoService winInfoService;
     private final UserRepository userRepository;
+    private final WinInfoDto winInfoDto;
+
+    public SimulationService(Lotto lotto, WinInfoService winInfoService, UserRepository userRepository) {
+        this.lotto = lotto;
+        this.winInfoService = winInfoService;
+        this.userRepository = userRepository;
+        this.winInfoDto = winInfoService.infoOfThisWeek();
+    }
 
     @Transactional
     public LottoDto buy(){
@@ -37,7 +44,6 @@ public class SimulationService {
     @Transactional
     public BuyResultDto buyOne(){
         LottoDto myLotto = buy();
-        WinInfoDto winInfoDto = winInfoService.infoOfThisWeek();
         BuyResultDto result = scoring(myLotto,winInfoDto);
         String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
 
@@ -51,7 +57,6 @@ public class SimulationService {
 
     @Transactional
     public List<BuyResultDto> buyBundle(int Cnt){
-        WinInfoDto winInfoDto = winInfoService.infoOfThisWeek();
         List<BuyResultDto> result = new ArrayList<>();
         for (int i = 0; i < Cnt; i++) {
             LottoDto myLotto = buy();
@@ -71,7 +76,6 @@ public class SimulationService {
         int cnt = 0;
         long money = 0;
         int[] notFirstButPrize = new int[4];
-        WinInfoDto winInfoDto = winInfoService.infoOfThisWeek();
         while(true){
             cnt++;
             money+=1000;
@@ -100,12 +104,6 @@ public class SimulationService {
                 + (notFirstButPrize[2] *( winInfoDto.getFourthPrize()))
                 + notFirstButPrize[3] *(5000)
                 - money;
-
-//        System.out.println("1등 상금:" +winInfoDto.getFirstPrize());
-//        System.out.println("2등 상금:" +notFirstButPrize[0] +"||"+( winInfoDto.getSecondPrize()));
-//        System.out.println("3등 상금:" +notFirstButPrize[1] +"||"+( winInfoDto.getThirdPrize()));
-//        System.out.println("4등 상금:" +notFirstButPrize[2] +"||"+( winInfoDto.getFourthPrize()));
-
 
         return BuyUtilFirstPlaceDto.builder()
                 .cnt(cnt)
