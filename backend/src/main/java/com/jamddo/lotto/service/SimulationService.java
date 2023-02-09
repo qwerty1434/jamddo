@@ -19,7 +19,6 @@ import java.util.Optional;
 import static com.jamddo.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 
 @Service
-@Transactional(readOnly = true)
 public class SimulationService {
     private final Lotto lotto;
     private final WinInfoService winInfoService;

@@ -12,22 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class WinInfoService {
     private final WinInfoRepository winInfoRepository;
 
-    @Transactional
     public WinningNumDto winningNumOfThisWeek() {
         return winInfoRepository.winningNumOfThisWeek();
     }
 
-    @Transactional
     public WinInfoDto infoOfThisWeek(){
         return winInfoRepository.InfoOfThisWeek();
     }
 
-    @Transactional
     public NumStatisticDto NumStatistic() {
         return winInfoRepository.NumStatistic();
     }
 
-    @Transactional
     public ColorStatisticDto ColorStatistic(){
         NumStatisticDto numStatisticDto = winInfoRepository.NumStatistic();
         int[] colorStatistic = new int[5];
@@ -48,7 +44,6 @@ public class WinInfoService {
         return ColorStatisticDto.builder().colorStatistic(colorStatistic).build();
     }
 
-    @Transactional
     public WinningNumArrOnlyDto WinningNumOnly(){
         int[] winningNumArr = new int[6];
         WinningNumDto result = winInfoRepository.winningNumOfThisWeek();
@@ -59,6 +54,5 @@ public class WinInfoService {
         winningNumArr[4] = result.getFifthNum();
         winningNumArr[5] = result.getSixthNum();
         return WinningNumArrOnlyDto.builder().winningNumArr(winningNumArr).build();
-
     }
 }
