@@ -53,6 +53,6 @@ public class WinInfoService {
         winningNumArr[3] = result.getFourthNum();
         winningNumArr[4] = result.getFifthNum();
         winningNumArr[5] = result.getSixthNum();
-        return WinningNumArrOnlyDto.builder().winningNumArr(winningNumArr).build();
+        return new WinningNumArrOnlyDto(winningNumArr);
     }
 }
