@@ -4,11 +4,14 @@ package com.jamddo.lotto.controller;
 
 import com.jamddo.global.exception.CustomException;
 import com.jamddo.lotto.service.WinInfoService;
+import com.querydsl.codegen.ClassPathUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.PostConstruct;
 
 @RestController
 @RequiredArgsConstructor
@@ -70,7 +73,11 @@ public class WinInfoController {
         }
     }
 
-
+    @PostConstruct
+    public void init() throws Exception{
+        ClassPathUtils.scanPackage(Thread.currentThread().getContextClassLoader(),
+                "com.jamddo.lotto.domain");
+    }
 
 
 }

@@ -44,6 +44,7 @@ dependencies {
 	// querydsl 추가
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+	implementation group: 'com.querydsl', name: 'querydsl-codegen', version: '5.0.0'
 
 	// security 추가
 	implementation 'org.springframework.boot:spring-boot-starter-security'
