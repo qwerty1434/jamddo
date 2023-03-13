@@ -42,7 +42,7 @@ Infra
 원인을 파악하기 위해 조건을 바꿔가면서 실험을 진행한 결과 statistic페이지와 simulation페이지 중 statistic페이지를 먼저 접속한 경우, statistic페이지의 4가지 api요청 중 overview를 포함해 둘 이상의 api요청을 보낼 때 문제가 발생한다는 걸 파악했습니다.  <br>
 하지만 api에 대한 단위 테스트에서는 문제가 발생하지 않았다는 점과 overview api를 단일로 요청할 때는 문제가 발생하지 않았다는 걸 이상하게 생각해 멀티 쓰레드 환경에서 비동기 방식으로 api를 요청하는 단위 테스트를 추가로 진행했고, 동일한 문제가 발생하는 걸 통해 멀티 쓰레드와 관련된 문제라는 걸 확인할 수 있었습니다. <br>
 이를 근거로 querydsl의 멀티 쓰레드 환경에 대해 조사했고, querydsl의 공식 문서를 통해 ‘Q타입이 순환 의존을 가질 경우, 멀티 쓰레드 환경에서 Q타입을 초기화하면 데드락이 발생할 수 있다’는 내용을 확인할 수 있었습니다.  <br>
-저는 postConstructor시점에 ClassPathUtils의 scanPackage메서드를 사용해 멀티 쓰레드 환경 이전에 단일 쓰레드에서 클래스를 초기화하는 방식으로 데드락을 방지해 문제를 해결했고, 겪었던 내용을 정리한 뒤 [블로그](https://velog.io/@qwerty1434/%EB%A9%80%ED%8B%B0%EC%93%B0%EB%A0%88%EB%93%9C-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-querydsl-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)에 기록해 지식을 공유했습니다. <br>
+저는 postConstructor시점에 ClassPathUtils의 scanPackage메서드를 사용해 멀티 쓰레드 환경 이전에 단일 쓰레드에서 클래스를 초기화하는 방식으로 데드락을 방지해 문제를 해결했습니다.
 
 ## ✔ 화면 구성
 
