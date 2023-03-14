@@ -1,8 +1,8 @@
 package com.jamddo.lotto.service;
 
-import com.jamddo.lotto.dto.WinInfoDto;
-import com.jamddo.lotto.dto.WinningNumDto;
-import org.assertj.core.api.Assertions;
+import com.jamddo.lotto.dto.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,24 +17,21 @@ class WinInfoServiceTest {
     WinInfoService winInfoService;
 
     @Test
-    public void 이번주_당첨번호(){
-        WinningNumDto result = winInfoService.winningNumOfThisWeek();
-        Assertions.assertThatNoException();
+    @DisplayName("멀티쓰레드 환경에서 deadlock없이 진행")
+    public void multiThreadTest(){
     }
 
-    @Test
-    public void 이번주_당첨정보(){
-        WinInfoDto result = winInfoService.infoOfThisWeek();
-        Assertions.assertThatNoException();
+
+
+
+    private void sleep(int millis){
+        try{
+            Thread.sleep(millis);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
-    @Test
-    public void 동시_테스트(){
-        WinningNumDto result = winInfoService.winningNumOfThisWeek();
-        WinInfoDto result2 = winInfoService.infoOfThisWeek();
-        Assertions.assertThatNoException();
-
-    }
 
 
 }

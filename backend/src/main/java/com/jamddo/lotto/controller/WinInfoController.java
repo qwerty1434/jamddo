@@ -73,11 +73,11 @@ public class WinInfoController {
         }
     }
 
-    @PostConstruct
-    public void init() throws Exception{
-        ClassPathUtils.scanPackage(Thread.currentThread().getContextClassLoader(),
-                "com.jamddo.lotto.domain");
-    }
+//    @PostConstruct
+//    public void init() throws Exception{
+//        ClassPathUtils.scanPackage(Thread.currentThread().getContextClassLoader(),
+//                "com.jamddo.lotto.domain");
+//    }
 
 
 }

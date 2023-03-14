@@ -40,7 +40,7 @@ public class WinInfoRepositoryCustomImpl implements WinInfoRepositoryCustom{
     public WinInfoDto InfoOfThisWeek() {
         WinInfoDto winInfoDto = queryFactory
                 .select(Projections.constructor(WinInfoDto.class,
-                        winNum.id, // 됨
+                        winInfo.id,
                         winNum.firstNum,
                         winNum.secondNum,
                         winNum.thirdNum,
