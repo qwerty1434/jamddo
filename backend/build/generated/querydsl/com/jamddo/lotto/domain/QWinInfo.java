@@ -22,6 +22,8 @@ public class QWinInfo extends EntityPathBase<WinInfo> {
 
     public static final QWinInfo winInfo = new QWinInfo("winInfo");
 
+    public final DatePath<java.time.LocalDate> date = createDate("date", java.time.LocalDate.class);
+
     public final NumberPath<Long> firstPrize = createNumber("firstPrize", Long.class);
 
     public final NumberPath<Integer> firstPrizeBeneficiaryNum = createNumber("firstPrizeBeneficiaryNum", Integer.class);

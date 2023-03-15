@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
@@ -19,18 +21,34 @@ class WinInfoServiceTest {
     @Test
     @DisplayName("멀티쓰레드 환경에서 deadlock없이 진행")
     public void multiThreadTest(){
+        Runnable userA = () -> {
+            winInfoService.winningNumOfThisWeek();
+        };
+        Thread threadA = new Thread(userA);
+        threadA.start();
+
+        Runnable userB = () -> {
+            winInfoService.infoOfThisWeek();
+        };
+        Thread threadB = new Thread(userB);
+        threadB.start();
+
+        Runnable userC = () -> {
+            winInfoService.NumStatistic();
+        };
+        Thread threadC = new Thread(userC);
+        threadC.start();
+
+        Assertions.assertTimeoutPreemptively(Duration.ofMillis(4000),()->{
+            threadA.join();
+            threadB.join();
+            threadC.join();
+        });
     }
 
 
 
 
-    private void sleep(int millis){
-        try{
-            Thread.sleep(millis);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
 
 
 
