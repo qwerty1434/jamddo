@@ -78,6 +78,4 @@ public class WinInfoController {
         ClassPathUtils.scanPackage(Thread.currentThread().getContextClassLoader(),
                 "com.jamddo.lotto.domain");
     }
-
-
 }
