@@ -2,19 +2,16 @@ package com.jamddo.lotto.service;
 
 import com.jamddo.global.exception.CustomException;
 import com.jamddo.lotto.dto.*;
-import com.jamddo.lotto.repository.WinInfoRepository;
 import com.jamddo.lotto.utils.Lotto;
 import com.jamddo.user.domain.User;
 import com.jamddo.user.repository.UserRepository;
 import com.jamddo.user.util.SecurityUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static com.jamddo.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 
@@ -33,7 +30,7 @@ public class SimulationService {
     }
 
     @Transactional
-    public LottoDto buy(){
+    public LottoDto buyOneLotto(){
         return lotto.Generate();
     }
     @Transactional
@@ -41,8 +38,8 @@ public class SimulationService {
         return lotto.Scoring(myLotto,winInfoDto);
     }
     @Transactional
-    public BuyResultDto buyOne(){
-        LottoDto myLotto = buy();
+    public BuyResultDto buyOneLottoByUser(){
+        LottoDto myLotto = buyOneLotto();
         BuyResultDto result = scoring(myLotto,winInfoDto);
         String nickname = SecurityUtil.getCurrentUsername().orElseThrow(()->new CustomException(MEMBER_NOT_FOUND));
 
@@ -58,15 +55,20 @@ public class SimulationService {
     public List<BuyResultDto> buyBundle(int Cnt){
         List<BuyResultDto> result = new ArrayList<>();
         for (int i = 0; i < Cnt; i++) {
-            LottoDto myLotto = buy();
+            LottoDto myLotto = buyOneLotto();
             result.add(scoring(myLotto,winInfoDto));
         }
-        // 기본적으로 오름차순 이지만 -1은 맨 뒤로 보내는 정렬
+        orderAscendingExceptMinusOne(result);
+
+        return result;
+    }
+
+    // 기본적으로 오름차순 이지만 -1은 맨 뒤로 보내는 정렬
+    public void orderAscendingExceptMinusOne(List<BuyResultDto> result){
         Collections.sort(result, (o1, o2) -> {
             if(o1.getRank() == -1 || o2.getRank() == -1) return o2.getRank() - o1.getRank();
             return o1.getRank() - o2.getRank();
         });
-        return result;
 
     }
 
@@ -78,7 +80,7 @@ public class SimulationService {
         while(true){
             cnt++;
             money+=1000;
-            LottoDto myLotto = buy();
+            LottoDto myLotto = buyOneLotto();
             BuyResultDto result = scoring(myLotto,winInfoDto);
             if(result.getRank() == 1) break;
             else if(result.getRank() == 2) {

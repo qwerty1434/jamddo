@@ -31,7 +31,7 @@ class SimulationServiceTest {
     @Test
     @DisplayName("구매한 번호에 중복이 발생했는지 확인")
     public void buyNotDuplicateTest(){
-        LottoDto lottoDto = simulationService.buy();
+        LottoDto lottoDto = simulationService.buyOneLotto();
         List<Integer> lst = new ArrayList<>();
         Set<Integer> set = new HashSet<>();
         lst.add(lottoDto.getFirstNum());
@@ -55,7 +55,7 @@ class SimulationServiceTest {
     @DisplayName("익명의 유저는 CustomException 없이 통과")
     public void buyOne(){
         Assertions.assertDoesNotThrow(() -> {
-            simulationService.buyOne();
+            simulationService.buyOneLottoByUser();
         });
     }
 
@@ -63,7 +63,7 @@ class SimulationServiceTest {
     @DisplayName("유저에 대한 내용을 입력하지 않았을 경우 CustomException 발생")
     public void buyOneWithoutMemberInfo(){
         Assertions.assertThrows(CustomException.class,()->{
-            simulationService.buyOne();
+            simulationService.buyOneLottoByUser();
         });
     }
 
