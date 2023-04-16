@@ -20,7 +20,7 @@ public class SimulationService {
     private final Lotto lotto;
     private final WinInfoService winInfoService;
     private final UserRepository userRepository;
-    private final WinInfoDto winInfoDto;
+    private WinInfoDto winInfoDto;
 
     public SimulationService(Lotto lotto, WinInfoService winInfoService, UserRepository userRepository) {
         this.lotto = lotto;
