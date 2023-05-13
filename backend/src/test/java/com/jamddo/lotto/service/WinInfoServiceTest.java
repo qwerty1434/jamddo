@@ -19,7 +19,7 @@ class WinInfoServiceTest {
     WinInfoService winInfoService;
 
     @Test
-    @DisplayName("멀티쓰레드 환경에서 deadlock없이 진행")
+    @DisplayName("멀티쓰레드 환경에서 deadlock이 발생하지 않아야 합니다.")
     public void multiThreadTest(){
         Runnable userA = () -> {
             winInfoService.winningNumOfThisWeek();

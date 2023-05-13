@@ -11,12 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithAnonymousUser;
-import javax.transaction.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootTest
 @Transactional
@@ -29,46 +26,41 @@ class SimulationServiceTest {
 
 
     @Test
-    @DisplayName("구매한 번호에 중복이 발생했는지 확인")
-    public void buyNotDuplicateTest(){
-        LottoDto lottoDto = simulationService.buy();
-        List<Integer> lst = new ArrayList<>();
-        Set<Integer> set = new HashSet<>();
-        lst.add(lottoDto.getFirstNum());
-        lst.add(lottoDto.getSecondNum());
-        lst.add(lottoDto.getThirdNum());
-        lst.add(lottoDto.getFourthNum());
-        lst.add(lottoDto.getFifthNum());
-        lst.add(lottoDto.getSixthNum());
-
-        set.add(lottoDto.getFirstNum());
-        set.add(lottoDto.getSecondNum());
-        set.add(lottoDto.getThirdNum());
-        set.add(lottoDto.getFourthNum());
-        set.add(lottoDto.getFifthNum());
-        set.add(lottoDto.getSixthNum());        
-        Assertions.assertEquals(lst.size(),set.size());
+    @DisplayName("구매한 로또가 유효한 번호인지 확인합니다.")
+    public void lottoValidationCheck(){
+        LottoDto lottoDto = simulationService.buyOneLotto();
+        int[] numArray = lottoDto.getArray();
+        boolean[] isUsed = new boolean[46];
+        for (int num: numArray) {
+            Assertions.assertTrue(isLottoNumRange(num));
+            Assertions.assertFalse(isUsed[num]);
+            isUsed[num] = true;
+        }
+    }
+    private boolean isLottoNumRange(int num){
+        if(1 <= num && num <= 45) return true;
+        return false;
     }
     
     @Test
     @WithAnonymousUser
-    @DisplayName("익명의 유저는 CustomException 없이 통과")
+    @DisplayName("익명의 유저는 CustomException 없이 구매가 가능합니다.")
     public void buyOne(){
         Assertions.assertDoesNotThrow(() -> {
-            simulationService.buyOne();
+            simulationService.buyOneLottoByUser();
         });
     }
 
     @Test
-    @DisplayName("유저에 대한 내용을 입력하지 않았을 경우 CustomException 발생")
+    @DisplayName("유저에 대한 내용을 입력하지 않았을 경우 CustomException 발생합니다.")
     public void buyOneWithoutMemberInfo(){
         Assertions.assertThrows(CustomException.class,()->{
-            simulationService.buyOne();
+            simulationService.buyOneLottoByUser();
         });
     }
 
     @Test
-    @DisplayName("buyBundle은 Cnt만큼 구매되어야 함")
+    @DisplayName("buyBundle은 Cnt만큼 구매되어야 합니다.")
     public void buyBundle(){
         int Cnt = 10;
         List<BuyResultDto> result = simulationService.buyBundle(Cnt);
@@ -76,7 +68,7 @@ class SimulationServiceTest {
     }
 
     @Test
-    @DisplayName("이번주 당첨 정보로 역산했을 때 금액이 일치해야 함")
+    @DisplayName("1등당첨시까지 구매로직은 역산해서 동일한 금액이 나와야 합니다.")
     public void buyUntilFirstPlace(){
         BuyUtilFirstPlaceDto result = simulationService.untilFirstPlace();
         WinInfoDto info = winInfoService.infoOfThisWeek();
