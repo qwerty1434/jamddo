@@ -21,7 +21,7 @@ public class SimulationController {
     public ResponseEntity buyOne(){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(
-                    simulationService.buyOneLottoByUser()
+                    simulationService.buyOne()
             );
         }catch(CustomException e){
             return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());

@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 
 import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -19,15 +17,18 @@ public class Lotto {
 
 
     public LottoDto Generate(){
-        Integer[] Lotto = new Random()
-                .ints(1, 45 + 1)
-                .distinct()
-                .limit(6)
-                .boxed()
-                .sorted()
-                .collect(Collectors.toList())
-                .toArray(new Integer[0]);
-
+        int[] Lotto = new int[6];
+        for (int i = 0; i < 6; i++) {
+            int num = (int)(Math.random() * 45) + 1;
+            Lotto[i] = num;
+            for (int j = 0; j < i; j++) {
+                if(Lotto[i] == Lotto[j]){
+                    i--;
+                    break;
+                }
+            }
+        }
+        Arrays.sort(Lotto);
         return LottoDto.builder()
                 .firstNum(Lotto[0])
                 .secondNum(Lotto[1])

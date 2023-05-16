@@ -5,17 +5,14 @@ spring:
   profiles:
     include: API-KEY
   datasource:
-    url: ${MYSQL_URL}
+    url: jdbc:mysql://localhost:3306/jamddo?serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
-#    hikari:
-#      leak-detection-threshold: 3000
-#      maximum-pool-size: 128
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
     generate-ddl: true
     defer-datasource-initialization: true
@@ -23,17 +20,6 @@ spring:
     hibernate:
       format_sql: true
 
-
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
-  sql:
-    init:
-      mode: never
-
-
-#logging:
-#  level:
-#    com.zaxxer.hikari.HikariConfig: DEBUG
-#    com.zaxxer.hikari: TRACE
