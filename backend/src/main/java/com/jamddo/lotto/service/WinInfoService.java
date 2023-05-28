@@ -47,7 +47,7 @@ public class WinInfoService {
     public WinningNumArrOnlyDto WinningNumOnly(){
         int[] winningNumArr = new int[6];
         WinningNumDto result = winInfoRepository.winningNumOfThisWeek();
-        winningNumArr[0] = result.getFifthNum();
+        winningNumArr[0] = result.getFirstNum();
         winningNumArr[1] = result.getSecondNum();
         winningNumArr[2] = result.getThirdNum();
         winningNumArr[3] = result.getFourthNum();
