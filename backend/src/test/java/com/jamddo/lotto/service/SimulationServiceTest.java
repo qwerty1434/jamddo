@@ -3,6 +3,7 @@ package com.jamddo.lotto.service;
 import com.jamddo.global.exception.CustomException;
 import com.jamddo.lotto.dto.BuyResultDto;
 import com.jamddo.lotto.dto.BuyUtilFirstPlaceDto;
+import com.jamddo.lotto.dto.LottoDto;
 import com.jamddo.lotto.dto.WinInfoDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,22 @@ class SimulationServiceTest {
     WinInfoService winInfoService;
 
 
-
+    @Test
+    @DisplayName("구매한 로또가 유효한 번호인지 확인합니다.")
+    public void lottoValidationCheck(){
+        LottoDto lottoDto = simulationService.buyOneLotto();
+        int[] numArray = lottoDto.getArray();
+        boolean[] isUsed = new boolean[46];
+        for (int num: numArray) {
+            Assertions.assertTrue(isLottoNumRange(num));
+            Assertions.assertFalse(isUsed[num]);
+            isUsed[num] = true;
+        }
+    }
+    private boolean isLottoNumRange(int num){
+        if(1 <= num && num <= 45) return true;
+        return false;
+    }
     
     @Test
     @WithAnonymousUser
