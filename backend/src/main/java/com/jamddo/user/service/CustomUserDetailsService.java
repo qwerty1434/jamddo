@@ -25,7 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String username) {
-        System.out.println("loadUserByUsername 실행!!!!!!!!!!!!");
         // DB에서 권한정보와 유저정보를 가져옴
         return userRepository.findByNickname(username)
                 .map(user -> createUser(username, user))
