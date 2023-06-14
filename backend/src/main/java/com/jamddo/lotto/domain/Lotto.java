@@ -6,7 +6,9 @@ public class Lotto {
     public Lotto() {
         this.lottoNumbers = new LottoNumbers();
     }
-
+    public Rank getRank(LottoNumbers winningNumbers){
+        return new Rank();
+    }
     public int getMatchCnt(LottoNumbers winningNumbers){
         return lottoNumbers.getMatchCnt(winningNumbers);
     }
