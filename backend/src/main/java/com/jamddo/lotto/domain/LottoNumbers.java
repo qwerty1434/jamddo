@@ -1,7 +1,9 @@
 package com.jamddo.lotto.domain;
 
+import javax.persistence.Embeddable;
 import java.util.List;
 
+@Embeddable
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_CNT = 6;
     private final List<LottoNumber> lottoNumbers;
@@ -16,8 +18,11 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public boolean containsBonusNumber(LottoNumber bonusNumber){
+    public boolean isContainBonusNumber(LottoNumber bonusNumber){
         return lottoNumbers.contains(bonusNumber);
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }

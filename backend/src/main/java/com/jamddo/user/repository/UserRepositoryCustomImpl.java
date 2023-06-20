@@ -1,6 +1,5 @@
 package com.jamddo.user.repository;
 
-import com.jamddo.user.domain.QUser;
 import com.jamddo.user.dto.RankingDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -10,10 +9,10 @@ import java.util.List;
 
 import static com.jamddo.user.domain.QUser.user;
 
-public class UserRepositoryImpl implements UserRepositoryCustom{
+public class UserRepositoryCustomImpl implements UserRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
-    public UserRepositoryImpl(EntityManager em) {
+    public UserRepositoryCustomImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 

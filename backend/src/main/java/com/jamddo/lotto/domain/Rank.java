@@ -1,24 +1,40 @@
 package com.jamddo.lotto.domain;
 
-import java.util.List;
+import com.jamddo.lotto.domain.history.Rewards;
 
 public class Rank {
+    private int rank;
+    private long prize;
 
-    private int matchCnt;
-    private int prize;
-    private int beneficiaryNum;
-    private int round;
-    static{
-
+    private Rank(int matchCnt, boolean isBonus, Rewards rewards) {
+        this.rank = calculateRank(matchCnt,isBonus);
+        this.prize = calculatePrize(rank,rewards);
     }
 
-    public Rank(int matchCnt, int prize, int beneficiaryNum) {
-        this.matchCnt = matchCnt;
-        this.prize = prize;
-        this.beneficiaryNum = beneficiaryNum;
+    public static Rank of(int matchCnt, boolean isBonus, Rewards rewards){
+        return new Rank(matchCnt,isBonus,rewards);
     }
 
-    public boolean isUpdated(int round){
-        return this.round == round;
+    private int calculateRank(int matchCnt, boolean isBonus) {
+        if (matchCnt == 6) return 1;
+        if (matchCnt == 5) {
+            if (isBonus) return 2;
+            return 3;
+        }
+        if (matchCnt == 4) return 4;
+        if (matchCnt == 3) return 5;
+        return -1;
+    }
+
+    private long calculatePrize(int rank, Rewards rewards) {
+        return rewards.getRewards().get(rank - 1);
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 }

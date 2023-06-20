@@ -1,9 +1,11 @@
 package com.jamddo.lotto.domain;
 
+import javax.persistence.Embeddable;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Embeddable
 public class LottoNumber {
     private static final List<LottoNumber> LOTTO_NUMBER_LIST;
     private static final Map<Integer,LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
@@ -20,7 +22,7 @@ public class LottoNumber {
                 .collect(Collectors.toList());
 
         LOTTO_NUMBER_LIST.stream()
-                .forEach(v -> LOTTO_NUMBER_MAP.put(v.lottoNumber, v));
+                .forEach(LottoNumber -> LOTTO_NUMBER_MAP.put(LottoNumber.lottoNumber, LottoNumber));
     }
 
     public static List<LottoNumber> getLottoNumbers(int cnt){
