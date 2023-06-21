@@ -23,7 +23,7 @@ public class Rank {
         }
         if (matchCnt == 4) return 4;
         if (matchCnt == 3) return 5;
-        return -1;
+        return 0;
     }
 
     private long calculatePrize(int rank, Rewards rewards) {

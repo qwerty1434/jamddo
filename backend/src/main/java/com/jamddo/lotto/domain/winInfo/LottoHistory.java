@@ -2,7 +2,9 @@ package com.jamddo.lotto.domain.winInfo;
 
 import com.jamddo.lotto.domain.lotto.LottoNumber;
 import com.jamddo.lotto.domain.lotto.LottoNumbers;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class LottoHistory {
     @Id

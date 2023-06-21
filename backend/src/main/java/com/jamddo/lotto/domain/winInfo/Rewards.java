@@ -22,23 +22,23 @@ public class Rewards {
     }
 
     public long getRewards(int rank){
-        if(rank <= 0) return rewards[0];
+        if(rank < 0) return rewards[0];
         return rewards[rank];
     }
 
     public long getFirst(){
-        return rewards[0];
-    }
-    public long getSecond(){
         return rewards[1];
     }
-    public long getThird(){
+    public long getSecond(){
         return rewards[2];
     }
-    public long getFourth(){
+    public long getThird(){
         return rewards[3];
     }
-    public long getFifth(){
+    public long getFourth(){
         return rewards[4];
+    }
+    public long getFifth(){
+        return rewards[5];
     }
 }
