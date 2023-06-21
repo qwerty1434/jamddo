@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/info")
-public class WinInfoController {
+public class StatisticController {
     private final HistoryService historyService;
 
     @GetMapping("/winningNum")

@@ -4,7 +4,8 @@ import com.jamddo.lotto.domain.LottoNumber;
 import com.jamddo.lotto.domain.LottoNumbers;
 import lombok.Getter;
 
-@Getter
+import java.util.List;
+
 public class WinningNumResponse {
     LottoNumbers lottoNumbers;
     LottoNumber bonusNumber;
@@ -18,4 +19,11 @@ public class WinningNumResponse {
         return new WinningNumResponse(lottoNumbers,bonusNumber);
     }
 
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbersWithInteger();
+    }
+
+    public Integer getBonusNumber() {
+        return bonusNumber.getLottoNumber();
+    }
 }

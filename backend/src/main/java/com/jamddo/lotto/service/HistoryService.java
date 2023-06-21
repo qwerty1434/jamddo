@@ -3,6 +3,7 @@ package com.jamddo.lotto.service;
 import com.jamddo.lotto.domain.LottoNumber;
 import com.jamddo.lotto.domain.LottoNumbers;
 import com.jamddo.lotto.domain.history.Beneficiaries;
+import com.jamddo.lotto.domain.history.LottoHistory;
 import com.jamddo.lotto.domain.history.Rewards;
 import com.jamddo.lotto.dto.WinningInfoResponse;
 import com.jamddo.lotto.dto.WinningNumResponse;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -34,7 +36,9 @@ public class HistoryService {
 
     public int[] getAllNumberStatistic() {
         int[] statistic = new int[46];
-        List<LottoNumbers> result = lottoHistoryRepository.findAllNumbers();
+        List<LottoNumbers> result = lottoHistoryRepository.findAllNumbers().stream()
+                .map(LottoHistory::getLottoNumbers)
+                .collect(Collectors.toList());
         for (LottoNumbers lottoNumbers : result) {
             for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
                 statistic[lottoNumber.getLottoNumber()]++;

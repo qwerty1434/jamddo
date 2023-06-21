@@ -2,13 +2,11 @@ package com.jamddo.lotto.dto;
 
 import com.jamddo.lotto.domain.history.Beneficiaries;
 import com.jamddo.lotto.domain.history.Rewards;
-import lombok.Getter;
 
-@Getter
 public class WinningInfoResponse {
     int round;
     Rewards rewards;
-    Beneficiaries beneficiaries ;
+    Beneficiaries beneficiaries;
 
     private WinningInfoResponse(int round, Rewards rewards, Beneficiaries beneficiaries) {
         this.round = round;
@@ -20,4 +18,15 @@ public class WinningInfoResponse {
         return new WinningInfoResponse(round,rewards,beneficiaries);
     }
 
+    public int getRound() {
+        return round;
+    }
+
+    public long[] getRewards() {
+        return rewards.getRewards();
+    }
+
+    public int[] getBeneficiaries() {
+        return beneficiaries.getBeneficiaries();
+    }
 }
