@@ -1,11 +1,9 @@
 package com.jamddo.lotto.domain;
 
 import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Embeddable
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_CNT = 6;
     @ElementCollection

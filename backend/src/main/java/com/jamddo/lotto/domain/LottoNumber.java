@@ -1,11 +1,9 @@
 package com.jamddo.lotto.domain;
 
-import javax.persistence.Embeddable;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Embeddable
 public class LottoNumber {
     private static final int START_NUM = 1;
     private static final int END_NUM = 45;
