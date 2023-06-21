@@ -21,7 +21,7 @@ public class SimulationService {
 
     @Transactional
     public LottoResultResponse buyOneLotto(){
-        Lotto lotto = LottoShop.buyOne();
+        Lotto lotto = LottoShop.buyOneAutomatically();
         LottoHistory lottoHistory = lottoHistoryRepository.findRecent();
         return LottoResultResponse.of(lotto,lottoHistory);
     }

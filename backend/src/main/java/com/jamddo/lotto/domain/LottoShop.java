@@ -12,8 +12,11 @@ import java.util.List;
 @Component
 public class LottoShop {
 
-    public static Lotto buyOne(){
+    public static Lotto buyOneAutomatically(){
         return Lotto.ofAuto();
+    }
+    public static Lotto buyOneManually(List<Integer> givenNumbers){
+        return Lotto.ofManual(givenNumbers);
     }
 
     public static List<Lotto> buyBundle(int cnt){
@@ -31,7 +34,7 @@ public class LottoShop {
         while(true){
             cnt++;
             money+=1000;
-            Lotto myLotto = buyOne();
+            Lotto myLotto = buyOneAutomatically();
             Rank result = myLotto.getRank(lottoHistory);
 
             if(result.getRank() == 1) break;
