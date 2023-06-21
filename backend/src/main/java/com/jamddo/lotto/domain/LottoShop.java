@@ -2,7 +2,7 @@ package com.jamddo.lotto.domain;
 
 import com.jamddo.lotto.domain.history.LottoHistory;
 import com.jamddo.lotto.domain.history.Rewards;
-import com.jamddo.lotto.dto.BuyUntilFirstPlaceDto;
+import com.jamddo.lotto.dto.BuyUntilFirstResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class LottoShop {
         return lottos;
     }
 
-    public static BuyUntilFirstPlaceDto untilFirstPlace(LottoHistory lottoHistory){
+    public static BuyUntilFirstResponse buyUntilFirstPlace(LottoHistory lottoHistory){
         int cnt = 0;
         long money = 0;
         int[] notFirstButPrize = new int[4];
@@ -51,7 +51,7 @@ public class LottoShop {
 
         long profit = calculateProfit(money,rewards,notFirstButPrize);
 
-        return BuyUntilFirstPlaceDto.builder()
+        return BuyUntilFirstResponse.builder()
                 .cnt(cnt)
                 .money(money)
                 .notFirstButPrize(notFirstButPrize)

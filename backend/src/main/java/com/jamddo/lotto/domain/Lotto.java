@@ -11,6 +11,11 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers();
     }
 
+    /*
+     *  첫 로또 추첨일은 2002년 12월 7일
+     *  첫 로또 구매 가능일은 2001년 11월 30일
+     *  1_038_654_000_000L은 2001년 11월 30일을 milliseconds로 환산한 값
+     */
     private long generateRound(){
         final long ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
         final long START_DATE = 1_038_654_000_000L;

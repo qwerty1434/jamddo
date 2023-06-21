@@ -18,7 +18,7 @@ public class SimulationController {
     @ApiOperation(value ="로또 하나를 구매")
     @GetMapping("/buyOne")
     public ResponseEntity buyOne(){
-        return ResponseEntity.status(HttpStatus.OK).body(simulationService.buyOneLottoByUser());
+        return ResponseEntity.status(HttpStatus.OK).body(simulationService.buyOneLotto());
     }
 
     @ApiOperation(value ="로또 N개 구매")
