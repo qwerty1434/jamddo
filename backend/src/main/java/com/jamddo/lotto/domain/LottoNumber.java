@@ -32,7 +32,7 @@ public class LottoNumber {
         throw new IllegalArgumentException("NOT_VALID_NUM");
     }
 
-    public static List<LottoNumber> getLottoNumbers(int cnt){
+    public static List<LottoNumber> getLottoNumbersAutomatically(int cnt){
         Collections.shuffle(LOTTO_NUMBER_LIST);
         return LOTTO_NUMBER_LIST.subList(0,cnt);
     }

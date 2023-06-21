@@ -16,7 +16,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers ofAuto(){
-        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers(LOTTO_NUMBER_CNT);
+        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbersAutomatically(LOTTO_NUMBER_CNT);
         return new LottoNumbers(lottoNumbers);
     }
     public static LottoNumbers ofManual(List<Integer> givenNumbers){
