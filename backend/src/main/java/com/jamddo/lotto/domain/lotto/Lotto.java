@@ -38,6 +38,7 @@ public class Lotto {
         boolean isBonus = isContainBonusNumber(lottoHistory.getBonusNumber());
         return Rank.of(matchCnt,isBonus,lottoHistory.getRewards());
     }
+
     public int getMatchCnt(LottoNumbers winningNumbers){
         return lottoNumbers.getMatchCnt(winningNumbers);
     }

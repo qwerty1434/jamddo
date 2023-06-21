@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static com.jamddo.global.exception.ErrorCode.NOT_VALID_LOTTO_NUM;
+
 public class LottoNumber {
     private static final int START_NUM = 1;
     private static final int END_NUM = 45;
@@ -27,7 +29,7 @@ public class LottoNumber {
 
     public static LottoNumber from(int givenNumber){
         if(START_NUM <= givenNumber && givenNumber <= END_NUM) return LOTTO_NUMBER_MAP.get(givenNumber);
-        throw new IllegalArgumentException("NOT_VALID_NUM");
+        throw new IllegalArgumentException(NOT_VALID_LOTTO_NUM.getMessage());
     }
 
     public static List<LottoNumber> getLottoNumbersAutomatically(int cnt){
