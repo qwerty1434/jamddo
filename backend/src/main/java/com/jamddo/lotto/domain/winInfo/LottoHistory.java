@@ -64,7 +64,7 @@ public class LottoHistory {
     }
 
     public Beneficiaries getBeneficiaries() {
-        return Beneficiaries.of(firstBeneficiaries, secondBeneficiaries, thirdBeneficiaries, fourthBeneficiaries, fifthBeneficiaries);
+        return Beneficiaries.of(firstBeneficiaries,secondBeneficiaries,thirdBeneficiaries,fourthBeneficiaries,fifthBeneficiaries);
     }
 
     public LottoNumbers getLottoNumbers() {
