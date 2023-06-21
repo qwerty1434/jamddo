@@ -2,12 +2,14 @@ package com.jamddo.lotto.domain.winInfo;
 
 import com.jamddo.lotto.domain.lotto.LottoNumber;
 import com.jamddo.lotto.domain.lotto.LottoNumbers;
+import lombok.Builder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Builder
 @Entity
 public class LottoHistory {
     @Id

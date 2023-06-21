@@ -10,7 +10,7 @@ public class Lotto {
     private final LottoNumbers lottoNumbers;
 
     private Lotto(LottoNumbers lottoNumbers) {
-        this.round = generateRound();
+        this.round = generateRound(System.currentTimeMillis());
         this.lottoNumbers = lottoNumbers;
     }
     public static Lotto ofAuto(){
@@ -25,10 +25,9 @@ public class Lotto {
      *  첫 로또 구매 가능일은 2001년 11월 30일
      *  1_038_654_000_000L은 2001년 11월 30일을 milliseconds로 환산한 값
      */
-    private long generateRound(){
+    private long generateRound(long NOW_DATE){
         final long ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
         final long START_DATE = 1_038_654_000_000L;
-        final long NOW_DATE = System.currentTimeMillis();
         return ((NOW_DATE - START_DATE) / ONE_WEEK +
                 (((NOW_DATE - START_DATE) % ONE_WEEK == 0) ? 0 : 1));
     }
