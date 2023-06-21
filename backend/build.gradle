@@ -37,23 +37,11 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	// swagger
-	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
-	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.0'
+
 	// querydsl 추가
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 	implementation group: 'com.querydsl', name: 'querydsl-codegen', version: '5.0.0'
-
-	// security 추가
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	testImplementation 'org.springframework.security:spring-security-test'
-
-	// jwt 추가
-	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
 	// 테스트코드에 롬복 적용
 	testCompileOnly 'org.projectlombok:lombok'

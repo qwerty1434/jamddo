@@ -1,9 +1,12 @@
 package com.jamddo.lotto.dto;
 
 import com.jamddo.lotto.domain.Lotto;
+import com.jamddo.lotto.domain.LottoNumber;
 import com.jamddo.lotto.domain.LottoNumbers;
 import com.jamddo.lotto.domain.Rank;
 import com.jamddo.lotto.domain.history.LottoHistory;
+
+import java.util.List;
 
 public class LottoResultResponse {
     LottoNumbers lottoNumbers;
@@ -22,7 +25,11 @@ public class LottoResultResponse {
         return rank.getPrize();
     }
 
-    public Rank getRank() {
-        return rank;
+    public int getRank() {
+        return rank.getRank();
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.getLottoNumbersWithInteger();
     }
 }

@@ -3,14 +3,14 @@ package com.jamddo.lotto.domain.history;
 
 
 public class Rewards {
-    long[] rewards = new long[5];
+    long[] rewards = new long[6];
 
     public Rewards(long first, long second, long third, long fourth, long fifth) {
-        rewards[0] = first;
-        rewards[1] = second;
-        rewards[2] = third;
-        rewards[3] = fourth;
-        rewards[4] = fifth;
+        rewards[1] = first;
+        rewards[2] = second;
+        rewards[3] = third;
+        rewards[4] = fourth;
+        rewards[5] = fifth;
     }
 
     public static Rewards of(long first, long second, long third, long fourth, long fifth){
@@ -22,7 +22,8 @@ public class Rewards {
     }
 
     public long getRewards(int rank){
-        return rewards[rank-1];
+        if(rank <= 0) return rewards[0];
+        return rewards[rank];
     }
 
     public long getFirst(){

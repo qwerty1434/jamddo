@@ -1,15 +1,16 @@
 package com.jamddo.lotto.domain;
 
-import javax.persistence.ElementCollection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_CNT = 6;
-    @ElementCollection
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        Collections.sort(lottoNumbers,Comparator.comparingInt(LottoNumber::getLottoNumber));
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -24,9 +25,20 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
     public int getMatchCnt(LottoNumbers winningNumbers){
-        // 원본값 자체가 변경됨. 원본값을 보존해야 할 이유가 있는가?
-        lottoNumbers.retainAll(winningNumbers.lottoNumbers);
-        return lottoNumbers.size();
+        int myNumberIdx = 0;
+        int winningNumberIdx = 0;
+        int duplicateCnt = 0;
+        while(myNumberIdx < lottoNumbers.size() && winningNumberIdx < lottoNumbers.size()){
+            if(lottoNumbers.get(myNumberIdx).getLottoNumber() == winningNumbers.lottoNumbers.get(winningNumberIdx).getLottoNumber()){
+                duplicateCnt++;
+                myNumberIdx++;
+            }else if(lottoNumbers.get(myNumberIdx).getLottoNumber() > winningNumbers.lottoNumbers.get(winningNumberIdx).getLottoNumber()){
+                winningNumberIdx++;
+            }else {
+                myNumberIdx++;
+            }
+        }
+        return duplicateCnt;
     }
 
     public boolean isContainBonusNumber(LottoNumber bonusNumber){
@@ -35,5 +47,12 @@ public class LottoNumbers {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public List<Integer> getLottoNumbersWithInteger(){
+        return lottoNumbers.stream()
+                .map(LottoNumber::getLottoNumber)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

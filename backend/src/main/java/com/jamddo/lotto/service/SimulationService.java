@@ -38,9 +38,9 @@ public class SimulationService {
 
     private static Comparator<LottoResultResponse> getResponseDtoComparator() {
         return (o1, o2) -> {
-            if (o1.getRank().getRank() == -1 || o2.getRank().getRank() == -1)
-                return o2.getRank().getRank() - o1.getRank().getRank();
-            return o1.getRank().getRank() - o2.getRank().getRank();
+            if (o1.getRank() == -1 || o2.getRank() == -1)
+                return o2.getRank() - o1.getRank();
+            return o1.getRank() - o2.getRank();
         };
     }
 
