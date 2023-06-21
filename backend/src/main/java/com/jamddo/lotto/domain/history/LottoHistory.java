@@ -26,11 +26,11 @@ public class LottoHistory {
     private long fourthPrize;
     private long fifthPrize;
     // 당첨자 수
-    private int firstPrizeBeneficiaryNum;
-    private int secondPrizeBeneficiaryNum;
-    private int thirdPrizeBeneficiaryNum;
-    private int fourthPrizeBeneficiaryNum;
-    private int fifthPrizeBeneficiaryNum;
+    private int firstBeneficiaries;
+    private int secondBeneficiaries;
+    private int thirdBeneficiaries;
+    private int fourthBeneficiaries;
+    private int fifthBeneficiaries;
     // 당첨 번호
     private int firstNum;
     private int secondNum;
@@ -58,7 +58,7 @@ public class LottoHistory {
     }
 
     public Beneficiaries getBeneficiaries() {
-        return Beneficiaries.of(firstPrizeBeneficiaryNum,secondPrizeBeneficiaryNum,thirdPrizeBeneficiaryNum,fourthPrizeBeneficiaryNum,fifthPrizeBeneficiaryNum);
+        return Beneficiaries.of(firstBeneficiaries, secondBeneficiaries, thirdBeneficiaries, fourthBeneficiaries, fifthBeneficiaries);
     }
 
     public LottoNumbers getLottoNumbers() {
