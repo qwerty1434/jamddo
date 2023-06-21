@@ -1,7 +1,8 @@
 package com.jamddo.lotto.domain;
 
-import com.jamddo.lotto.domain.history.LottoHistory;
-import com.jamddo.lotto.domain.history.Rewards;
+import com.jamddo.lotto.domain.lotto.Lotto;
+import com.jamddo.lotto.domain.winInfo.LottoHistory;
+import com.jamddo.lotto.domain.winInfo.Rewards;
 import com.jamddo.lotto.dto.BuyUntilFirstResponse;
 import org.springframework.stereotype.Component;
 

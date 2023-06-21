@@ -1,4 +1,4 @@
-package com.jamddo.lotto.domain.history;
+package com.jamddo.lotto.domain.winInfo;
 
 public class Beneficiaries {
     int[] beneficiaries = new int[5];

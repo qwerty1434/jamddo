@@ -1,4 +1,4 @@
-package com.jamddo.lotto.domain;
+package com.jamddo.lotto.domain.lotto;
 
 import java.util.Collections;
 import java.util.Comparator;

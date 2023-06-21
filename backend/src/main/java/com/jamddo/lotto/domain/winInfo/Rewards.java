@@ -1,4 +1,4 @@
-package com.jamddo.lotto.domain.history;
+package com.jamddo.lotto.domain.winInfo;
 
 
 

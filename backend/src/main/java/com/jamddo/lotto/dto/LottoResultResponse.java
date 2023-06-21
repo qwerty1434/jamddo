@@ -1,9 +1,9 @@
 package com.jamddo.lotto.dto;
 
-import com.jamddo.lotto.domain.Lotto;
-import com.jamddo.lotto.domain.LottoNumbers;
+import com.jamddo.lotto.domain.lotto.Lotto;
+import com.jamddo.lotto.domain.lotto.LottoNumbers;
 import com.jamddo.lotto.domain.Rank;
-import com.jamddo.lotto.domain.history.LottoHistory;
+import com.jamddo.lotto.domain.winInfo.LottoHistory;
 
 import java.util.List;
 

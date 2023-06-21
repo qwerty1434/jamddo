@@ -1,8 +1,8 @@
 package com.jamddo.lotto.service;
 
-import com.jamddo.lotto.domain.Lotto;
+import com.jamddo.lotto.domain.lotto.Lotto;
 import com.jamddo.lotto.domain.LottoShop;
-import com.jamddo.lotto.domain.history.LottoHistory;
+import com.jamddo.lotto.domain.winInfo.LottoHistory;
 import com.jamddo.lotto.dto.BuyUntilFirstResponse;
 import com.jamddo.lotto.dto.LottoResultResponse;
 import com.jamddo.lotto.repository.LottoHistoryRepository;

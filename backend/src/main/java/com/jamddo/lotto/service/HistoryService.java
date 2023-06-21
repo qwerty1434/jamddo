@@ -1,10 +1,10 @@
 package com.jamddo.lotto.service;
 
-import com.jamddo.lotto.domain.LottoNumber;
-import com.jamddo.lotto.domain.LottoNumbers;
-import com.jamddo.lotto.domain.history.Beneficiaries;
-import com.jamddo.lotto.domain.history.LottoHistory;
-import com.jamddo.lotto.domain.history.Rewards;
+import com.jamddo.lotto.domain.lotto.LottoNumber;
+import com.jamddo.lotto.domain.lotto.LottoNumbers;
+import com.jamddo.lotto.domain.winInfo.Beneficiaries;
+import com.jamddo.lotto.domain.winInfo.LottoHistory;
+import com.jamddo.lotto.domain.winInfo.Rewards;
 import com.jamddo.lotto.dto.WinningInfoResponse;
 import com.jamddo.lotto.dto.WinningNumResponse;
 import com.jamddo.lotto.repository.LottoHistoryRepository;

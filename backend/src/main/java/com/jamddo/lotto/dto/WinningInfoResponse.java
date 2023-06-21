@@ -1,7 +1,7 @@
 package com.jamddo.lotto.dto;
 
-import com.jamddo.lotto.domain.history.Beneficiaries;
-import com.jamddo.lotto.domain.history.Rewards;
+import com.jamddo.lotto.domain.winInfo.Beneficiaries;
+import com.jamddo.lotto.domain.winInfo.Rewards;
 
 public class WinningInfoResponse {
     int round;

@@ -1,6 +1,6 @@
 package com.jamddo.lotto.controller;
 
-import com.jamddo.lotto.domain.history.LottoHistory;
+import com.jamddo.lotto.domain.winInfo.LottoHistory;
 import com.jamddo.lotto.service.InsertService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

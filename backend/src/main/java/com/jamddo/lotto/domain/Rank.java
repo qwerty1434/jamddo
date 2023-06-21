@@ -1,6 +1,6 @@
 package com.jamddo.lotto.domain;
 
-import com.jamddo.lotto.domain.history.Rewards;
+import com.jamddo.lotto.domain.winInfo.Rewards;
 
 public class Rank {
     private int rank;

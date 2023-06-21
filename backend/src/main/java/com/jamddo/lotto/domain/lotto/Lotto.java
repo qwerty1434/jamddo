@@ -1,6 +1,7 @@
-package com.jamddo.lotto.domain;
+package com.jamddo.lotto.domain.lotto;
 
-import com.jamddo.lotto.domain.history.LottoHistory;
+import com.jamddo.lotto.domain.Rank;
+import com.jamddo.lotto.domain.winInfo.LottoHistory;
 
 import java.util.List;
 

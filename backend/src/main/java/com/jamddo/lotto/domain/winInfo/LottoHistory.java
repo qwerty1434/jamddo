@@ -1,7 +1,7 @@
-package com.jamddo.lotto.domain.history;
+package com.jamddo.lotto.domain.winInfo;
 
-import com.jamddo.lotto.domain.LottoNumber;
-import com.jamddo.lotto.domain.LottoNumbers;
+import com.jamddo.lotto.domain.lotto.LottoNumber;
+import com.jamddo.lotto.domain.lotto.LottoNumbers;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

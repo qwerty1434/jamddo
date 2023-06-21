@@ -1,6 +1,6 @@
 package com.jamddo.lotto.service;
 
-import com.jamddo.lotto.domain.history.LottoHistory;
+import com.jamddo.lotto.domain.winInfo.LottoHistory;
 import com.jamddo.lotto.repository.LottoHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

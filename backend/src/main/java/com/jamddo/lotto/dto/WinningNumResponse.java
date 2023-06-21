@@ -1,8 +1,7 @@
 package com.jamddo.lotto.dto;
 
-import com.jamddo.lotto.domain.LottoNumber;
-import com.jamddo.lotto.domain.LottoNumbers;
-import lombok.Getter;
+import com.jamddo.lotto.domain.lotto.LottoNumber;
+import com.jamddo.lotto.domain.lotto.LottoNumbers;
 
 import java.util.List;
 
