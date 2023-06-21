@@ -2,7 +2,9 @@ package com.jamddo.lotto.dto;
 
 import com.jamddo.lotto.domain.LottoNumber;
 import com.jamddo.lotto.domain.LottoNumbers;
+import lombok.Getter;
 
+@Getter
 public class WinningNumResponse {
     LottoNumbers lottoNumbers;
     LottoNumber bonusNumber;

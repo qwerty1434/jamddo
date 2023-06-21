@@ -1,7 +1,6 @@
 package com.jamddo.lotto.dto;
 
 import com.jamddo.lotto.domain.Lotto;
-import com.jamddo.lotto.domain.LottoNumber;
 import com.jamddo.lotto.domain.LottoNumbers;
 import com.jamddo.lotto.domain.Rank;
 import com.jamddo.lotto.domain.history.LottoHistory;

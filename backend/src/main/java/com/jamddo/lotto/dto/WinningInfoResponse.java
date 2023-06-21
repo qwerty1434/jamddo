@@ -2,7 +2,9 @@ package com.jamddo.lotto.dto;
 
 import com.jamddo.lotto.domain.history.Beneficiaries;
 import com.jamddo.lotto.domain.history.Rewards;
+import lombok.Getter;
 
+@Getter
 public class WinningInfoResponse {
     int round;
     Rewards rewards;

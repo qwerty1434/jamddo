@@ -32,7 +32,7 @@ public class LottoNumber {
 
     public static List<LottoNumber> getLottoNumbersAutomatically(int cnt){
         Collections.shuffle(LOTTO_NUMBER_LIST);
-        return LOTTO_NUMBER_LIST.subList(0,cnt);
+        return new ArrayList<>(LOTTO_NUMBER_LIST.subList(0,cnt));
     }
 
     public int getLottoNumber(){
