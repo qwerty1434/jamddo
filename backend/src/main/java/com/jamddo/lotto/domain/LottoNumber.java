@@ -7,22 +7,29 @@ import java.util.stream.IntStream;
 
 @Embeddable
 public class LottoNumber {
+    private static final int START_NUM = 1;
+    private static final int END_NUM = 45;
     private static final List<LottoNumber> LOTTO_NUMBER_LIST;
     private static final Map<Integer,LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
-
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
-        this.lottoNumber = lottoNumber;
-    }
     static{
-        LOTTO_NUMBER_LIST = IntStream.rangeClosed(1,45)
+        LOTTO_NUMBER_LIST = IntStream.rangeClosed(START_NUM,END_NUM)
                 .boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
         LOTTO_NUMBER_LIST.stream()
                 .forEach(LottoNumber -> LOTTO_NUMBER_MAP.put(LottoNumber.lottoNumber, LottoNumber));
+    }
+
+    private LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoNumber from(int givenNumber){
+        if(START_NUM <= givenNumber && givenNumber <= END_NUM) return LOTTO_NUMBER_MAP.get(givenNumber);
+        throw new IllegalArgumentException("NOT_VALID_NUM");
     }
 
     public static List<LottoNumber> getLottoNumbers(int cnt){

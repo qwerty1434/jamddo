@@ -27,7 +27,7 @@ public class Rank {
     }
 
     private long calculatePrize(int rank, Rewards rewards) {
-        return rewards.getRewards().get(rank - 1);
+        return rewards.getRewards(rank - 1);
     }
 
     public int getRank() {

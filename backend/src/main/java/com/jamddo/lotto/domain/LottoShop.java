@@ -12,13 +12,13 @@ import java.util.List;
 public class LottoShop {
 
     public static Lotto buyOne(){
-        return new Lotto();
+        return Lotto.ofAuto();
     }
 
     public static List<Lotto> buyBundle(int cnt){
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < cnt; i++){
-            lottos.add(new Lotto());
+            lottos.add(Lotto.ofAuto());
         }
         return lottos;
     }
@@ -60,11 +60,11 @@ public class LottoShop {
     }
 
     private static long calculateProfit(long money, Rewards rewards, int[] notFirstButPrize){
-        return  rewards.getFirstReward()
-                + (notFirstButPrize[0] * rewards.getSecondReward())
-                + (notFirstButPrize[1] * rewards.getThirdReward())
-                + (notFirstButPrize[2] * rewards.getFourthReward())
-                + (notFirstButPrize[3] * rewards.getFifthReward())
+        return  rewards.getFirst()
+                + (notFirstButPrize[0] * rewards.getSecond())
+                + (notFirstButPrize[1] * rewards.getThird())
+                + (notFirstButPrize[2] * rewards.getFourth())
+                + (notFirstButPrize[3] * rewards.getFifth())
                 - money;
     }
 

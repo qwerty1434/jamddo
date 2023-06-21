@@ -2,13 +2,21 @@ package com.jamddo.lotto.domain;
 
 import com.jamddo.lotto.domain.history.LottoHistory;
 
+import java.util.List;
+
 public class Lotto {
     long round;
     private final LottoNumbers lottoNumbers;
 
-    public Lotto() {
+    private Lotto(LottoNumbers lottoNumbers) {
         this.round = generateRound();
-        this.lottoNumbers = new LottoNumbers();
+        this.lottoNumbers = lottoNumbers;
+    }
+    public static Lotto ofAuto(){
+        return new Lotto(LottoNumbers.ofAuto());
+    }
+    public static Lotto ofManual(List<Integer> givenNumbers){
+        return new Lotto(LottoNumbers.ofManual(givenNumbers));
     }
 
     /*
@@ -40,7 +48,6 @@ public class Lotto {
     public boolean isUpdated(int round){
         return this.round == round;
     }
-
 
     public long getRound() {
         return round;

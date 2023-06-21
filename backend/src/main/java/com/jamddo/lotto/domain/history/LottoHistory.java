@@ -6,13 +6,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class LottoHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     // 회차
     int round;
     // 당첨일자
@@ -20,20 +20,25 @@ public class LottoHistory {
     private LocalDate date;
 
     // 상금
-    @Embedded
-    Rewards rewards;
-
+    private long firstPrize;
+    private long secondPrize;
+    private long thirdPrize;
+    private long fourthPrize;
+    private long fifthPrize;
     // 당첨자 수
-    @Embedded
-    Beneficiaries beneficiaries;
-
-    // 당첨번호
-    @Embedded
-    private LottoNumbers lottoNumbers;
-
-    // 보너스 번호
-    @Embedded
-    private LottoNumber bonusNumber;
+    private int firstPrizeBeneficiaryNum;
+    private int secondPrizeBeneficiaryNum;
+    private int thirdPrizeBeneficiaryNum;
+    private int fourthPrizeBeneficiaryNum;
+    private int fifthPrizeBeneficiaryNum;
+    // 당첨 번호
+    private int firstNum;
+    private int secondNum;
+    private int thirdNum;
+    private int fourthNum;
+    private int fifthNum;
+    private int sixthNum;
+    private int bonusNum;
 
 
     public Long getId() {
@@ -49,18 +54,19 @@ public class LottoHistory {
     }
 
     public Rewards getRewards() {
-        return rewards;
+        return Rewards.of(firstPrize,secondPrize,thirdPrize,fourthPrize,fifthPrize);
     }
 
     public Beneficiaries getBeneficiaries() {
-        return beneficiaries;
+        return Beneficiaries.of(firstPrizeBeneficiaryNum,secondPrizeBeneficiaryNum,thirdPrizeBeneficiaryNum,fourthPrizeBeneficiaryNum,fifthPrizeBeneficiaryNum);
     }
 
     public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+        List<Integer> numbers = List.of(firstNum,secondNum,thirdNum,fourthNum,fifthNum,sixthNum);
+        return LottoNumbers.ofManual(numbers);
     }
 
     public LottoNumber getBonusNumber() {
-        return bonusNumber;
+        return LottoNumber.from(bonusNum);
     }
 }
