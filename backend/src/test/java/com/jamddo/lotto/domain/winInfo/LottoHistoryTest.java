@@ -33,7 +33,7 @@ class LottoHistoryTest {
 
     @Test
     @DisplayName("당첨금액 정보를 잘 반환하는지 테스트")
-    void test1(){
+    void getRewardsMethodOfLottoHistory(){
         Rewards rewards = lottoHistory.getRewards();
         assertThat(rewards.getFirst()).isEqualTo(1_000_000_000);
         assertThat(rewards.getSecond()).isEqualTo(100_000_000);
@@ -44,7 +44,7 @@ class LottoHistoryTest {
 
     @Test
     @DisplayName("당첨자 정보를 잘 반환하는지 테스트")
-    void test2(){
+    void getBeneficiariesMethodOfLottoHistory(){
         Beneficiaries beneficiaries = lottoHistory.getBeneficiaries();
         assertThat(beneficiaries.getFirst()).isEqualTo(1);
         assertThat(beneficiaries.getSecond()).isEqualTo(10);
@@ -55,7 +55,7 @@ class LottoHistoryTest {
 
     @Test
     @DisplayName("당첨 번호를 잘 반환하는지 테스트")
-    void test3(){
+    void getLottoNumbersMethodOfLottoHistory(){
         LottoNumbers lottoNumbers = lottoHistory.getLottoNumbers();
         assertThat(lottoNumbers.getLottoNumbers().get(0).getLottoNumber()).isEqualTo(2);
         assertThat(lottoNumbers.getLottoNumbers().get(1).getLottoNumber()).isEqualTo(4);
@@ -67,7 +67,7 @@ class LottoHistoryTest {
 
     @Test
     @DisplayName("보너스 번호를 잘 반환하는지 테스트")
-    void test4(){
+    void getBonusNumberMethodOfLottoHistory(){
         int bonusNumber = lottoHistory.getBonusNumber().getLottoNumber();
         assertThat(bonusNumber).isEqualTo(14);
     }
