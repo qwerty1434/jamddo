@@ -18,12 +18,14 @@ public class LottoNumbers {
         List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbersAutomatically(LOTTO_NUMBER_CNT);
         return new LottoNumbers(lottoNumbers);
     }
+
     public static LottoNumbers ofManual(List<Integer> givenNumbers){
         List<LottoNumber> lottoNumbers = givenNumbers.stream()
                 .map(givenNumber -> LottoNumber.from(givenNumber))
                 .collect(Collectors.toList());
         return new LottoNumbers(lottoNumbers);
     }
+
     public int getMatchCnt(LottoNumbers winningNumbers){
         int myNumberIdx = 0;
         int winningNumberIdx = 0;

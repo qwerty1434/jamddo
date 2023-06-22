@@ -20,7 +20,7 @@ public class LottoNumber {
                 .collect(Collectors.toList());
 
         LOTTO_NUMBER_LIST.stream()
-                .forEach(LottoNumber -> LOTTO_NUMBER_MAP.put(LottoNumber.lottoNumber, LottoNumber));
+                .forEach(LottoNumber -> LOTTO_NUMBER_MAP.put(LottoNumber.lottoNumber,LottoNumber));
     }
 
     private LottoNumber(int lottoNumber) {
