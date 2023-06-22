@@ -52,4 +52,5 @@ Infra: Docker
     - 문제 원인: Q타입이 순환 의존을 가질 경우, 멀티 쓰레드 환경에서 Q타입을 초기화하면 데드락이 발생할 가능성 존재했습니다.
     - 해결 방법: postConstructor시점에 ClassPathUtils의 scanPackage메서드를 사용해 멀티 쓰레드 환경 이전에 단일 쓰레드에서 클래스를 초기화 해 데드락 방지했습니다.
         - [문제 발견 및 해결 과정](https://velog.io/@qwerty1434/%EB%A9%80%ED%8B%B0%EC%93%B0%EB%A0%88%EB%93%9C-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-querydsl-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
+        - [문제 상황을 재현한 코드](https://github.com/qwerty1434/querydsl_multiThread_deadlock)
     - 현재는 리팩토링을 통해 엔티티의 순환 의존 관계를 제거해 데드락이 발생하지 않는 상태입니다.
