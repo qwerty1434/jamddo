@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
     @Test
-    @DisplayName("5개의 번호가 일치하고 보너스 번호가 일치하는 2등이 당첨된 경우 테스트")
+    @DisplayName("2등 당첨 테스트")
     void secondRankTest() {
         int matchCnt = 5;
         boolean isBonus = true;
@@ -20,7 +20,7 @@ class RankTest {
     }
 
     @Test
-    @DisplayName("5개의 번호가 일치하고 보너스 번호가 일치하지 않는 3등이 당첨된 경우 테스트")
+    @DisplayName("3등 당첨 테스트")
     void thirdRankTest() {
         int matchCnt = 5;
         boolean isBonus = false;
